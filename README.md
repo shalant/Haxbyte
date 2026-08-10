@@ -1,0 +1,135 @@
+# Haxbyte
+
+Web development consultancy site + content hub. Built by Doug Rosenberg as the
+freelance/consulting brand described in the `career-development` repo's
+[`HAXBYTE_BRAND_PLAN.md`](../career-development/projects/HAXBYTE_BRAND_PLAN.md) — that doc
+is the source of truth for business strategy (positioning, content plan, action items);
+this README is the technical/design brief for the codebase itself.
+
+**Status (2026-08-10):** design system decided, stack decided, not yet scaffolded.
+⚠ **Public launch is blocked** until Doug's friend responds re: using the "Haxbyte" name
+(coined jointly, personal courtesy question, not a legal one — see the brand plan doc for
+full context). Fine to build/scaffold locally in the meantime; do not register public DNS,
+push a live deploy, or register any public handles under the name until that's resolved.
+
+---
+
+## What this site does
+
+Two jobs in one:
+
+1. **Consulting front door** — where a referred small-business prospect lands, understands
+   what Haxbyte does, sees proof (before/afters, eventually case studies), and makes contact.
+2. **Content hub** — home for blog posts that get repurposed into LinkedIn content
+   (build-in-public, teaching, learning-journey posts).
+
+**Positioning:** lead offering is small business website builds (Squarespace + custom —
+landing pages, redesigns, launches). Workflow apps for SMBs is a later tier once a few
+site wins are banked. SEO is a later upsell to existing clients, not a standalone pitch.
+See the brand plan doc for the full reasoning.
+
+---
+
+## Stack
+
+- **Astro** + Markdown content collections — static output by default, shared layouts
+  avoid copy-pasting HTML across ~20 posts per site expected from repurposed blog content.
+- **Plain modern CSS** (custom properties, `:has()`, container queries, native nesting) —
+  no Tailwind, deliberately, to avoid the generic "Tailwind card grid" look and keep full
+  control over a distinctive visual system.
+- **View Transitions API** (Astro's built-in `<ClientRouter />`) for smooth page/section
+  transitions — native browser support, no animation library required for this.
+- **Cloudflare Pages** for hosting — free tier covers this site's traffic entirely, git-push
+  deploy, global CDN. Chosen over Azure Static Web Apps (Doug's day-job stack, would also
+  work, but is more infrastructure than a static marketing site needs and undercuts the
+  "deployed for $0" content angle) and over GoDaddy hosting (not built for git-based static
+  deploys).
+- **Domain:** `haxbyte.com`, registered at Hostinger — staying there (no reason to migrate
+  registrars). DNS points to Cloudflare once the site is ready to go live (nameserver
+  migration to Cloudflare is the cleaner option for full CDN benefit; a CNAME record at
+  Hostinger also works if DNS management should stay put).
+- **Contact:** not yet decided — plain `mailto:`/Calendly link (zero setup, default choice
+  given the "no spend until there's a client" rule) vs. an actual on-page form (would need
+  Cloudflare Pages Functions or a free-tier service like Formspree).
+
+---
+
+## Design system
+
+Brand colors were locked in during logo work (see `career-development/projects/haxbyte-assets/`
+for the source SVGs: `haxbyte-icon.svg`, `haxbyte-icon-tile.svg`, `favicon.svg`,
+`haxbyte-logo.svg`). The site's design system builds on that but deliberately does **not**
+extend the dark-navy-with-teal logo card across the whole page — that would be both the
+obvious move and a known AI-generated-design cliché (dark bg + single bright accent).
+Instead: the dark/teal world is confined to the hero (where the brand identity lives),
+handing off into a warm, readable, mostly-light body — literally enacting the brand's pitch
+of translating technical craft into something a non-technical small-business owner can read
+and trust.
+
+**Color:**
+| Token      | Hex       | Role                                                |
+|------------|-----------|------------------------------------------------------|
+| `--ink`    | `#0B1220` | Hero/dark sections, primary text on light            |
+| `--paper`  | `#EEF1EF` | Body background — cool pale sage-gray, not warm cream |
+| `--signal` | `#2DD4BF` | Brand teal — mostly confined to dark hero + links     |
+| `--spark`  | `#E8703F` | Warm ember accent — one CTA / the signature motif     |
+| `--ash`    | `#5B6A66` | Muted secondary text                                  |
+| `--white`  | `#FFFFFF` |                                                        |
+
+**Type:**
+- **Display:** IBM Plex Mono, bold, large scale, tight tracking — headlines. Monospace as a
+  confident hero headline face (not just tiny code snippets) is unusual for a consultancy
+  site and directly honest about the subject.
+- **Body:** Source Serif 4 (or Lora) — genuine reading comfort for blog/case-study content,
+  deliberate contrast against the mechanical mono headlines.
+- **Utility:** IBM Plex Mono, small, letter-spaced caps — labels, dates, "spec" tags
+  (`$0/mo hosting`, `Astro + Cloudflare`).
+
+**Layout:**
+```
+[ INK — full-bleed hero ]
+  logo mark, circuit trace draws itself in on load
+  plain mono headline: what you do, who it's for
+  one CTA
+     ⌇⌇⌇  ← pulse-line divider
+[ PAPER — content ]
+  services (plain language, no jargon)
+  work/portfolio — image-forward before/afters
+  "how I build it" — a real 4-step sequence
+    (only place numbered markers are justified — no decorative 01/02/03 elsewhere)
+  recent posts / contact
+```
+
+**Signature element:** a recurring "pulse-line" motif — a thin, jagged/stepped line using
+the same geometry as the logo's circuit trace. Reused as (1) the hero's draw-in animation
+(`stroke-dashoffset`, no JS library needed), (2) the divider between major sections, with
+the rhythm varying slightly each time. Ties the logo, the code/circuit subject matter, and
+a quiet nod to Doug's music background (reads as both a circuit trace and a signal waveform)
+into one motif specific to Haxbyte.
+
+---
+
+## Sitemap & content collections
+
+- `/` — home: hero, 2-3 recent posts, contact CTA
+- `/work` — before/after case studies and portfolio pieces
+- `/blog`, `/blog/[slug]` — content hub
+- `/about` — brief story, useful for a referral doing a trust-check
+- `/contact`
+
+Content collections: `blog` (title, date, tag: build-in-public / teaching / case-study /
+learning), `work` (client type, before/after images, short writeup).
+
+**Content format priorities** (from the brand plan, highest-leverage first): before/after
+or WIP progress shots → case study breakdowns → teaching/process posts → build-in-public
+learning posts. Full reasoning in the brand plan doc.
+
+---
+
+## Open decisions
+
+- [ ] Contact method: mailto/Calendly vs. on-page form
+- [ ] Domain consolidation across the four owned domains (haxbyte.com, dougrosenbergdev.com,
+      drpcconsulting.com, dougrosenbergarchive.com) — tracked in the brand plan doc, not
+      resolved yet
+- [ ] Friend's response re: the Haxbyte name — blocks public launch, not local build
