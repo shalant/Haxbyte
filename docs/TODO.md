@@ -1,7 +1,13 @@
 # Haxbyte Project TODO
 
 **Last updated:** 2026-08-11  
-**Status:** Build complete, positioned, ready for launch phase
+**Status:** Build complete, positioned, UI refined, ready for launch phase
+
+**Recent work (2026-08-11 EOD):**
+- ✅ Glassy navbar with backdrop blur + semi-transparent background
+- ✅ Active link detection and styling (aria-current, spark underline, signal color)
+- ✅ Ready to commit locally
+- 🔄 Font exploration in progress (learning typography principles before direction)
 
 ---
 
