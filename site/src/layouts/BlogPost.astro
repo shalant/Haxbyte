@@ -1,0 +1,107 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+	frontmatter: {
+		title: string;
+		date: Date;
+		tags: string[];
+		description?: string;
+	};
+}
+
+const { frontmatter } = Astro.props;
+const formattedDate = frontmatter.date.toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+---
+
+<Base title={frontmatter.title} description={frontmatter.description}>
+	<article class="blog-post">
+		<header class="post-header">
+			<h1>{frontmatter.title}</h1>
+			<div class="post-meta">
+				<time datetime={frontmatter.date.toISOString()}>
+					{formattedDate}
+				</time>
+				{frontmatter.tags && frontmatter.tags.length > 0 && (
+					<div class="tags">
+						{frontmatter.tags.map(tag => (
+							<span class="tag">{tag}</span>
+						))}
+					</div>
+				)}
+			</div>
+		</header>
+		<div class="post-content">
+			<slot />
+		</div>
+	</article>
+</Base>
+
+<style>
+	.blog-post {
+		max-width: var(--max-width-prose);
+		margin: var(--space-3xl) auto;
+		padding: 0 var(--space-md);
+	}
+
+	.post-header {
+		margin-bottom: var(--space-3xl);
+		border-bottom: 1px solid rgba(11, 18, 32, 0.1);
+		padding-bottom: var(--space-2xl);
+	}
+
+	.post-header h1 {
+		margin-top: 0;
+	}
+
+	.post-meta {
+		display: flex;
+		gap: var(--space-md);
+		align-items: center;
+		flex-wrap: wrap;
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: var(--text-sm);
+		color: var(--ash);
+	}
+
+	.tags {
+		display: flex;
+		gap: var(--space-sm);
+		flex-wrap: wrap;
+	}
+
+	.tag {
+		display: inline-block;
+		background-color: rgba(45, 212, 191, 0.1);
+		color: var(--signal);
+		padding: var(--space-2xs) var(--space-sm);
+		border-radius: var(--radius-sm);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.post-content {
+		font-size: var(--text-lg);
+		line-height: var(--leading-relaxed);
+	}
+
+	:global(.post-content p) {
+		margin-bottom: var(--space-lg);
+	}
+
+	:global(.post-content h2) {
+		margin-top: var(--space-3xl);
+	}
+
+	:global(.post-content img) {
+		max-width: 100%;
+		height: auto;
+		border-radius: var(--radius-md);
+		margin: var(--space-2xl) 0;
+	}
+</style>

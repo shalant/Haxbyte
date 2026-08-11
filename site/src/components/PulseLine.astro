@@ -1,0 +1,73 @@
+---
+interface Props {
+	class?: string;
+	variant?: 'hero' | 'divider';
+}
+
+const { class: className = '', variant = 'divider' } = Astro.props;
+---
+
+{variant === 'hero' && (
+	<svg
+		class={`pulse-line pulse-line--hero ${className}`}
+		viewBox="0 0 400 60"
+		preserveAspectRatio="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<polyline
+			points="0,30 10,25 20,35 30,25 40,35 50,30 60,20 70,40 80,25 90,35 100,30 110,20 120,40 130,25 140,35 150,30 160,22 170,38 180,26 190,34 200,28 210,18 220,42 230,24 240,36 250,30 260,20 270,40 280,25 290,35 300,28 310,18 320,42 330,26 340,34 350,30 360,22 370,38 380,28 390,35 400,30"
+			stroke="currentColor"
+			stroke-width="2"
+			fill="none"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		/>
+	</svg>
+)}
+
+{variant === 'divider' && (
+	<svg
+		class={`pulse-line pulse-line--divider ${className}`}
+		viewBox="0 0 400 40"
+		preserveAspectRatio="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<polyline
+			points="0,20 8,16 16,24 24,18 32,26 40,20 48,14 56,28 64,18 72,26 80,20 88,12 96,32 104,16 112,28 120,20 128,12 136,32 144,18 152,26 160,22 168,14 176,30 184,20 192,26 200,20 208,14 216,30 224,18 232,28 240,20 248,12 256,32 264,18 272,28 280,22 288,14 296,30 304,20 312,28 320,20 328,12 336,32 344,16 352,28 360,22 368,14 376,30 384,18 392,26 400,20"
+			stroke="currentColor"
+			stroke-width="1.5"
+			fill="none"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		/>
+	</svg>
+)}
+
+<style>
+	.pulse-line {
+		width: 100%;
+		height: auto;
+		color: var(--spark);
+		display: block;
+	}
+
+	.pulse-line--hero {
+		color: var(--signal);
+		height: 60px;
+		animation: drawLine 3s ease-in-out forwards;
+		stroke-dasharray: 500;
+		stroke-dashoffset: 500;
+	}
+
+	.pulse-line--divider {
+		color: var(--spark);
+		height: 40px;
+		margin: var(--space-2xl) 0;
+	}
+
+	@keyframes drawLine {
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+</style>

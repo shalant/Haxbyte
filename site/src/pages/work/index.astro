@@ -1,0 +1,154 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const workPieces = await getCollection('work');
+const sortedWork = workPieces.sort((a, b) => {
+	if (a.data.featured && !b.data.featured) return -1;
+	if (!a.data.featured && b.data.featured) return 1;
+	return 0;
+});
+---
+
+<Base title="Work" description="Portfolio of website projects and case studies">
+	<div class="work-container">
+		<header class="work-header">
+			<h1>Work</h1>
+			<p>A selection of recent projects and case studies.</p>
+		</header>
+
+		<div class="work-grid">
+			{sortedWork.map(piece => (
+				<article class="work-card">
+					<h2>
+						<a href={`/work/${piece.id}`}>{piece.data.title}</a>
+					</h2>
+					<p class="client">{piece.data.client}</p>
+					<p class="description">{piece.data.description}</p>
+					{piece.data.tags && piece.data.tags.length > 0 && (
+						<div class="tags">
+							{piece.data.tags.map(tag => (
+								<span class="tag">{tag}</span>
+							))}
+						</div>
+					)}
+					<a href={`/work/${piece.id}`} class="read-more">View project →</a>
+				</article>
+			))}
+		</div>
+
+		{sortedWork.length === 0 && (
+			<p class="no-work">No projects yet. Check back soon!</p>
+		)}
+	</div>
+</Base>
+
+<style>
+	.work-container {
+		max-width: var(--max-width-prose);
+		margin: 0 auto;
+		padding: var(--space-3xl) var(--space-md);
+	}
+
+	.work-header {
+		margin-bottom: var(--space-3xl);
+		border-bottom: 1px solid rgba(11, 18, 32, 0.1);
+		padding-bottom: var(--space-2xl);
+	}
+
+	.work-header h1 {
+		margin: 0 0 var(--space-md) 0;
+	}
+
+	.work-header p {
+		color: var(--ash);
+		font-size: var(--text-lg);
+		margin: 0;
+	}
+
+	.work-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--space-2xl);
+		margin-top: var(--space-2xl);
+	}
+
+	.work-card {
+		border: 1px solid rgba(11, 18, 32, 0.1);
+		border-radius: var(--radius-md);
+		padding: var(--space-lg);
+		background-color: var(--white);
+		display: flex;
+		flex-direction: column;
+		transition: box-shadow var(--duration-normal);
+	}
+
+	.work-card:hover {
+		box-shadow: 0 4px 12px rgba(11, 18, 32, 0.1);
+	}
+
+	.work-card h2 {
+		margin: 0 0 var(--space-sm) 0;
+		font-size: var(--text-xl);
+	}
+
+	.work-card h2 a {
+		color: var(--ink);
+		text-decoration: none;
+	}
+
+	.work-card h2 a:hover {
+		color: var(--signal);
+	}
+
+	.client {
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: var(--text-sm);
+		font-weight: 600;
+		color: var(--spark);
+		margin: 0 0 var(--space-md) 0;
+	}
+
+	.description {
+		color: var(--ash);
+		font-size: var(--text-base);
+		margin: 0 0 var(--space-md) 0;
+		flex-grow: 1;
+	}
+
+	.tags {
+		display: flex;
+		gap: var(--space-sm);
+		flex-wrap: wrap;
+		margin-bottom: var(--space-md);
+	}
+
+	.tag {
+		display: inline-block;
+		background-color: rgba(232, 112, 63, 0.1);
+		color: var(--spark);
+		padding: var(--space-2xs) var(--space-sm);
+		border-radius: var(--radius-sm);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.read-more {
+		color: var(--signal);
+		text-decoration: none;
+		font-weight: 600;
+		transition: opacity var(--duration-normal);
+		align-self: flex-start;
+	}
+
+	.read-more:hover {
+		opacity: 0.8;
+	}
+
+	.no-work {
+		text-align: center;
+		color: var(--ash);
+		padding: var(--space-3xl) 0;
+	}
+</style>

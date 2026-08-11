@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="About" description="Learn about Haxbyte and Doug Rosenberg">
+	<div class="about-container">
+		<h1>About Haxbyte</h1>
+
+		<section class="about-section">
+			<h2>Who I Am</h2>
+			<p>
+				I'm Doug Rosenberg. I spent 3+ years building enterprise systems—ERPs for global nonprofits,
+				platforms for Fortune 10 companies, complex full-stack applications for manufacturers. I led
+				architecture sessions, designed scalable databases, and shipped systems that handled thousands
+				of concurrent users.
+			</p>
+			<p>
+				Then I built two Squarespace sites for small businesses. And I realized something: most small
+				business owners don't need enterprise complexity, but they also shouldn't settle for generic,
+				slow, or fragile sites. They deserve the same engineering discipline and attention to performance
+				that enterprises get—just without the overhead.
+			</p>
+			<p>
+				Haxbyte is where I bring that. Clean code. Fast performance. Scalable architecture. Built for
+				your business to grow into.
+			</p>
+		</section>
+
+		<section class="about-section">
+			<h2>What I Build</h2>
+			<p>
+				Fast, clean websites that actually work. Built with the same rigor I applied to enterprise systems,
+				but scaled for small business needs and budgets. My work covers:
+			</p>
+			<ul>
+				<li><strong>Website launches</strong> — Building a web presence that positions your business as professional and trustworthy</li>
+				<li><strong>Redesigns</strong> — Upgrading from templates or outdated sites to something that performs and converts</li>
+				<li><strong>Custom builds</strong> — Sites tailored to your workflow, not squeezed into a platform's constraints</li>
+				<li><strong>Performance</strong> — Sites that load in under 2 seconds, built to scale as you grow</li>
+				<li><strong>Accessibility</strong> — Sites that work for everyone—WCAG 2.1 AA baseline</li>
+			</ul>
+		</section>
+
+		<section class="about-section">
+			<h2>The Haxbyte Approach</h2>
+			<p>
+				Enterprise discipline, applied thoughtfully to small business.
+			</p>
+			<ul>
+				<li><strong>Clean, readable code</strong> — Your site doesn't become technical debt. Future developers (or you) can understand and maintain it.</li>
+				<li><strong>Mobile-first design</strong> — Built for how people actually use the web, not retrofitted after the fact.</li>
+				<li><strong>Performance obsession</strong> — Sub-2-second loads. No bloat. No unnecessary frameworks. Just what your site needs.</li>
+				<li><strong>Accessibility built in</strong> — WCAG 2.1 AA baseline. Your site works for everyone, on every device.</li>
+				<li><strong>Architecture that scales</strong> — As your business grows, your site grows with it. No rewrites needed.</li>
+				<li><strong>Security from the ground up</strong> — HTTPS, secure by default, no shortcuts or workarounds.</li>
+			</ul>
+			<p>
+				No templates. No AI-generated design shortcuts. No vendor lock-in. Just intentional work built to last.
+			</p>
+		</section>
+
+		<section class="about-section cta-section">
+			<h2>Let's Talk</h2>
+			<p>
+				If you're looking to build or redesign a website, or just want to discuss web development,
+				I'd love to hear from you.
+			</p>
+			<a href="/contact" class="cta-button">Get in touch</a>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.about-container {
+		max-width: var(--max-width-prose);
+		margin: 0 auto;
+		padding: var(--space-3xl) var(--space-md);
+	}
+
+	.about-container h1 {
+		margin-top: 0;
+	}
+
+	.about-section {
+		margin-bottom: var(--space-3xl);
+		padding-bottom: var(--space-2xl);
+		border-bottom: 1px solid rgba(11, 18, 32, 0.1);
+	}
+
+	.about-section:last-child {
+		border-bottom: none;
+	}
+
+	.about-section h2 {
+		margin-top: 0;
+	}
+
+	.about-section ul {
+		list-style: none;
+		padding-left: 0;
+	}
+
+	.about-section li {
+		position: relative;
+		padding-left: var(--space-lg);
+		margin-bottom: var(--space-md);
+	}
+
+	.about-section li::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		color: var(--spark);
+		font-weight: 600;
+	}
+
+	.cta-section {
+		text-align: center;
+	}
+
+	.cta-button {
+		display: inline-block;
+		background-color: var(--spark);
+		color: var(--white);
+		padding: var(--space-md) var(--space-lg);
+		border-radius: var(--radius-md);
+		text-decoration: none;
+		font-weight: 600;
+		transition: opacity var(--duration-normal);
+	}
+
+	.cta-button:hover {
+		opacity: 0.9;
+	}
+</style>

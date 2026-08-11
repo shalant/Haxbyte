@@ -1,0 +1,209 @@
+---
+import '../styles/tokens.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = 'Haxbyte', description = 'Web development for small business' } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) => {
+	if (href === '/') return currentPath === '/';
+	return currentPath.startsWith(href);
+};
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<title>{title} — Haxbyte</title>
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar">
+				<a href="/" class="logo">
+					<img src="/haxbyte-mark.png" alt="Haxbyte" class="logo-mark" />
+					<span class="logo-text">Haxbyte</span>
+				</a>
+				<ul class="nav-links">
+					<li><a href="/work" aria-current={isActive('/work') ? 'page' : undefined}>Work</a></li>
+					<li><a href="/blog" aria-current={isActive('/blog') ? 'page' : undefined}>Blog</a></li>
+					<li><a href="/about" aria-current={isActive('/about') ? 'page' : undefined}>About</a></li>
+					<li><a href="/contact" aria-current={isActive('/contact') ? 'page' : undefined}>Contact</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer>
+			<div class="footer-content">
+				<div class="footer-brand">
+					<img src="/haxbyte-mark.png" alt="Haxbyte" class="footer-mark" />
+					<p>&copy; {new Date().getFullYear()} Haxbyte. All rights reserved.</p>
+				</div>
+				<div class="footer-links">
+					<a href="/about">About</a>
+					<a href="/contact">Contact</a>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style>
+	:global(html) {
+		scroll-behavior: smooth;
+	}
+
+	header {
+		background-color: rgba(11, 18, 32, 0.75);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		color: var(--white);
+		padding: var(--space-md);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+	}
+
+	.navbar {
+		max-width: var(--max-width-prose);
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 var(--space-md);
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+		text-decoration: none;
+		transition: opacity var(--duration-normal);
+	}
+
+	.logo:hover {
+		opacity: 0.8;
+	}
+
+	.logo-mark {
+		height: 32px;
+		width: auto;
+	}
+
+	.logo-text {
+		font-family: 'IBM Plex Mono', monospace;
+		font-weight: 700;
+		font-size: var(--text-lg);
+		color: var(--signal);
+	}
+
+	.nav-links {
+		display: flex;
+		list-style: none;
+		gap: var(--space-lg);
+		margin: 0;
+	}
+
+	.nav-links a {
+		color: var(--white);
+		text-decoration: none;
+		font-size: var(--text-sm);
+		transition: color var(--duration-normal);
+		position: relative;
+		padding-bottom: var(--space-xs);
+	}
+
+	.nav-links a:hover {
+		color: var(--signal);
+	}
+
+	.nav-links a[aria-current="page"] {
+		color: var(--signal);
+		font-weight: 600;
+	}
+
+	.nav-links a[aria-current="page"]::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background-color: var(--spark);
+		border-radius: 1px;
+	}
+
+	main {
+		min-height: calc(100vh - 200px);
+	}
+
+	footer {
+		background: linear-gradient(180deg, var(--ink) 0%, rgba(11, 18, 32, 0.95) 100%);
+		color: var(--white);
+		padding: var(--space-4xl) var(--space-md) var(--space-3xl);
+		margin-top: var(--space-4xl);
+		border-top: 2px solid var(--signal);
+	}
+
+	.footer-content {
+		max-width: var(--max-width-prose);
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: var(--space-2xl);
+		flex-wrap: wrap;
+	}
+
+	.footer-brand {
+		display: flex;
+		align-items: center;
+		gap: var(--space-md);
+	}
+
+	.footer-mark {
+		height: 28px;
+		width: auto;
+		opacity: 0.9;
+	}
+
+	footer p {
+		margin: 0;
+		font-size: var(--text-sm);
+		color: var(--paper);
+	}
+
+	.footer-links {
+		display: flex;
+		gap: var(--space-lg);
+	}
+
+	.footer-links a {
+		color: var(--signal);
+		text-decoration: none;
+		font-size: var(--text-sm);
+		transition: opacity var(--duration-normal);
+	}
+
+	.footer-links a:hover {
+		opacity: 0.7;
+	}
+</style>
