@@ -20,14 +20,14 @@
 - [ ] Set up analytics (Google Analytics or Plausible)
 
 ### SEO Fundamentals
-- [ ] Create `robots.txt` (allow all, point to sitemap)
-- [ ] Create `sitemap.xml` (auto-generate or manual list of all pages)
-- [ ] Add Open Graph meta tags (og:title, og:description, og:image for social sharing)
-- [ ] Add Twitter Card meta tags (for LinkedIn/Twitter previews)
-- [ ] Add canonical tags (prevent duplicate content issues)
-- [ ] Document image alt text requirements (all images need descriptive alt text)
-- [ ] Add JSON-LD structured data for blog posts (publish date, author, description)
-- [ ] Create custom 404 error page
+- [x] Create `robots.txt` (allow all, point to sitemap)
+- [x] Create `sitemap.xml` (hand-rolled Astro endpoint, no new dependency)
+- [x] Add Open Graph meta tags (og:title, og:description, og:image for social sharing)
+- [x] Add Twitter Card meta tags (for LinkedIn/Twitter previews)
+- [x] Add canonical tags (prevent duplicate content issues)
+- [x] Document image alt text requirements — already covered in `docs/engineering-standards.md` (Accessibility section)
+- [x] Add JSON-LD structured data for blog posts (publish date, author, description)
+- [x] Create custom 404 error page
 
 ### Mobile Testing (Critical)
 - [ ] Test on real iPhone (Safari)
@@ -81,6 +81,7 @@
 - [ ] Consider: add "Services" page breakdown (detailed explanation of each offer)
 - [ ] Redraw logo SVGs from DALL-E reference (currently PNG only)
 - [ ] Add video intro to hero (optional, performance-conscious approach)
+- [ ] Create a proper 1200×630 `og:image` asset — currently reuses `haxbyte-logo.png` (409×322), which will look small/low-res in social share previews
 
 ---
 
