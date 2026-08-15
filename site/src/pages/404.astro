@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page Not Found" description="This page doesn't exist.">
+	<div class="not-found">
+		<h1>404</h1>
+		<p>That page doesn't exist — it may have moved or the link's outdated.</p>
+		<a href="/" class="cta-button">Back to home</a>
+	</div>
+</Base>
+
+<style>
+	.not-found {
+		max-width: var(--max-width-prose);
+		margin: 0 auto;
+		padding: var(--space-5xl) var(--space-md);
+		text-align: center;
+	}
+
+	.not-found h1 {
+		font-size: var(--text-6xl);
+		color: var(--signal);
+		margin: 0 0 var(--space-md) 0;
+	}
+
+	.not-found p {
+		color: var(--ash);
+		font-size: var(--text-lg);
+		margin-bottom: var(--space-2xl);
+	}
+
+	.cta-button {
+		display: inline-block;
+		background-color: var(--spark);
+		color: var(--white);
+		padding: var(--space-md) var(--space-lg);
+		border-radius: var(--radius-md);
+		text-decoration: none;
+		font-weight: 600;
+		transition: opacity var(--duration-normal);
+	}
+
+	.cta-button:hover {
+		opacity: 0.9;
+	}
+</style>
