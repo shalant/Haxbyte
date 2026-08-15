@@ -13,6 +13,10 @@
       which now conflicts with the content-only positioning above. Flagged in the brand plan
       as an open call for Doug, not something to resolve here — the asset lives in the other
       repo.
+- [ ] **Pricing/offerings page** (e.g. Landing Page — $999, Custom Workflow — $2,999, Bigger
+      projects — quoted) — belongs on `dougrosenbergdev.com`, not here, per the content/
+      consulting split above. Noted 2026-08-15 as a forward pointer for whenever that site
+      gets built out; not started anywhere yet.
 - [ ] **Friend's response re: the "Haxbyte" name** — blocks public launch, not local build.
       Coined jointly; this is a personal courtesy question, not a legal one. See the brand
       plan doc for full context.
