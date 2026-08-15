@@ -4,30 +4,29 @@
 
 ## What this site does
 
-Two jobs in one:
+Content hub for a cold/discoverable audience — recruiters, engineers, future employers, not
+referred consulting prospects (that audience is `dougrosenbergdev.com`'s job now). Home for
+blog posts and build logs that get repurposed into LinkedIn content (build-in-public,
+teaching, learning-journey posts).
 
-1. **Consulting front door** — where a referred small-business prospect lands, understands
-   what Haxbyte does, sees proof (before/afters, eventually case studies), and makes contact.
-2. **Content hub** — home for blog posts that get repurposed into LinkedIn content
-   (build-in-public, teaching, learning-journey posts).
-
-**Positioning:** lead offering is small business website builds (Squarespace + custom —
-landing pages, redesigns, launches). Workflow apps for SMBs is a later tier once a few site
-wins are banked. SEO is a later upsell to existing clients, not a standalone pitch. Full
-reasoning lives in the brand plan doc (see below).
+**Positioning:** build-in-public / teaching voice aimed at technical credibility, not a
+sales pitch. Consulting leads, client-facing portfolio work, and case-study-as-proof content
+route to `dougrosenbergdev.com` under Doug's real name instead — see the domain-split
+decision in the brand plan doc for the full reasoning.
 
 ## Sitemap
 
-- `/` — home: hero, 2-3 recent posts, contact CTA
-- `/work` — before/after case studies and portfolio pieces
+- `/` — home: hero, recent posts
+- `/work` — build logs: write-ups on what I built, how, and why
 - `/blog`, `/blog/[slug]` — content hub
-- `/about` — brief story, useful for a referral doing a trust-check
+- `/about` — brief story, tuned for a technical/recruiter reader
 - `/contact`
 
 ## Content collections
 
 - `blog` — title, date, tag: `build-in-public` / `teaching` / `case-study` / `learning`
-- `work` — client type, before/after images, short writeup
+- `work` — build logs: client/project type, before/after images, write-up of what got built
+  and how
 
 ### Published Work (as of 2026-08-11)
 
@@ -36,7 +35,7 @@ reasoning lives in the brand plan doc (see below).
 
 ## Content format priorities
 
-From the brand plan, highest-leverage first:
+From the brand plan:
 
 1. Before/after or WIP progress shots
 2. Case study breakdowns

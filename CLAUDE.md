@@ -1,9 +1,12 @@
 # Haxbyte
 
-Web development consultancy site + content hub, built by Doug Rosenberg as his
-freelance/consulting brand. Two jobs in one: a consulting front door for referred
-small-business prospects, and a content hub for blog posts that get repurposed into
-LinkedIn content.
+Personal technical content brand built by Doug Rosenberg — build-in-public posts, project
+write-ups, and technical notes aimed at a cold/discoverable audience (recruiters, engineers,
+future employers). Per the 2026-08-14/15 brand split documented in `career-development`'s
+`HAXBYTE_BRAND_PLAN.md`, Haxbyte is content-only: consulting leads and client-facing
+portfolio work route to `dougrosenbergdev.com` under Doug's real name instead. The site
+still names Doug and links his real contact info — the split is about framing/audience, not
+pseudonymity.
 
 **Status:** design system and stack are decided; the project is **not yet scaffolded** —
 no Astro project, no source tree exists yet. This repo currently holds planning docs only.

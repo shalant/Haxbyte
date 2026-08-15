@@ -6,11 +6,11 @@ const blogPosts = await getCollection('blog');
 const sortedPosts = blogPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Base title="Blog" description="Latest posts on web development and small business">
+<Base title="Blog" description="Latest posts on building software and shipping in public">
 	<div class="blog-container">
 		<header class="blog-header">
 			<h1>Blog</h1>
-			<p>Thoughts on web development, small business, and building in public.</p>
+			<p>Build logs, technical notes, and thoughts on building in public.</p>
 		</header>
 
 		<div class="posts-list">

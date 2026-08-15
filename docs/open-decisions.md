@@ -2,9 +2,17 @@
 
 - [ ] **Contact method** — plain `mailto:`/Calendly link vs. an on-page form (would need
       Cloudflare Pages Functions or a free-tier service like Formspree).
-- [ ] **Domain consolidation** across the four owned domains (`haxbyte.com`,
-      `dougrosenbergdev.com`, `drpcconsulting.com`, `dougrosenbergarchive.com`) — tracked in
-      the brand plan doc, not resolved yet.
+- [x] ~~**Domain consolidation** across the four owned domains~~ — **mostly resolved
+      2026-08-15**: `haxbyte.com` = content brand (cold/discoverable audience),
+      `dougrosenbergdev.com` = consulting + client-facing portfolio (warm-referral leads,
+      real name). `drpcconsulting.com` and `dougrosenbergarchive.com` still genuinely open —
+      revisit only if a concrete need surfaces. See the brand plan doc's domain-split
+      decision.
+- [ ] **Logo tagline conflict** — the Haxbyte logo lockup (in `career-development`'s
+      `haxbyte-assets/`, not live text on this site) reads "WEB DEVELOPMENT CONSULTANCY,"
+      which now conflicts with the content-only positioning above. Flagged in the brand plan
+      as an open call for Doug, not something to resolve here — the asset lives in the other
+      repo.
 - [ ] **Friend's response re: the "Haxbyte" name** — blocks public launch, not local build.
       Coined jointly; this is a personal courtesy question, not a legal one. See the brand
       plan doc for full context.

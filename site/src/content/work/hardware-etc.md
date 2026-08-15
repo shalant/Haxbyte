@@ -1,18 +1,18 @@
 ---
 title: Hardware Etc LLC — Materials Supplier Site
 client: Hardware Etc LLC
-description: Professional Squarespace site for a Chicago-based materials supplier serving developers and contractors
+description: A Squarespace site for a Chicago-based materials supplier, built for B2B trust and bulk-order clarity
 tags: [squarespace, small business, b2b, e-commerce]
 featured: true
 ---
 
-## The Challenge
+## What it needed
 
-Hardware Etc LLC needed an online presence that conveyed professionalism and reliability to developers and contractors sourcing bulk materials. The business required a site that clearly communicated value propositions—quality materials, bulk purchasing savings, quick shipping, and private label options—while remaining easy to navigate.
+Hardware Etc LLC needed an online presence that conveyed professionalism and reliability to developers and contractors sourcing bulk materials. The site had to communicate value propositions clearly — quality materials, bulk purchasing savings, quick shipping, private label options — while staying easy to navigate.
 
-## The Solution
+## What I built
 
-Built a clean, professional Squarespace site that leads with business value. The homepage immediately communicates the core pitch: "Quality Materials at Better Prices." Navigation is straightforward (Services, Products, Contact), with clear calls-to-action for both inquiry and purchasing.
+A clean, professional Squarespace site that leads with business value. The homepage opens with the core pitch: "Quality Materials at Better Prices." Navigation is straightforward (Services, Products, Contact), with clear calls-to-action for both inquiry and purchasing.
 
 **Key features:**
 - Professional branding and logo treatment
@@ -21,8 +21,8 @@ Built a clean, professional Squarespace site that leads with business value. The
 - Direct contact and purchasing paths
 - Mobile-responsive design for on-site access
 
-## Results
+## How it turned out
 
-The site serves as a professional front door for the business, establishing credibility with referred prospects and enabling direct product inquiry and purchasing.
+The site now serves as the business's professional front door, handling direct product inquiry and purchasing.
 
 **Live site:** [hardwareetc.net](https://www.hardwareetc.net)

@@ -6,7 +6,7 @@ interface Props {
 	description?: string;
 }
 
-const { title = 'Haxbyte', description = 'Web development for small business' } = Astro.props;
+const { title = 'Haxbyte', description = 'Doug Rosenberg — building software and writing about how.' } = Astro.props;
 
 const currentPath = Astro.url.pathname;
 const isActive = (href: string) => {
@@ -38,7 +38,7 @@ const isActive = (href: string) => {
 					<span class="logo-text">Haxbyte</span>
 				</a>
 				<ul class="nav-links">
-					<li><a href="/work" aria-current={isActive('/work') ? 'page' : undefined}>Work</a></li>
+					<li><a href="/work" aria-current={isActive('/work') ? 'page' : undefined}>Builds</a></li>
 					<li><a href="/blog" aria-current={isActive('/blog') ? 'page' : undefined}>Blog</a></li>
 					<li><a href="/about" aria-current={isActive('/about') ? 'page' : undefined}>About</a></li>
 					<li><a href="/contact" aria-current={isActive('/contact') ? 'page' : undefined}>Contact</a></li>
