@@ -44,16 +44,22 @@ Non-negotiable, ties directly to `docs/engineering-standards.md`:
 - `prefers-reduced-motion` respected: the pulse-line draw-in and any scroll-triggered
   animation need a static fallback.
 
-## Positioning (as of 2026-08-11)
+## Positioning (as of 2026-08-15)
 
-**Haxbyte is enterprise discipline applied to small business.**
+**Haxbyte is a personal technical content brand — build-in-public, not a sales pitch.**
 
-Doug spent 3+ years building ERPs for nonprofits and platforms for Fortune 10 companies. Now he brings that rigor to small-business websites. The about page tells this story explicitly—it's the credibility anchor for everything else on the site.
+Per the 2026-08-14/15 brand split (`career-development/projects/HAXBYTE_BRAND_PLAN.md`),
+Haxbyte's audience is cold/discoverable — recruiters, engineers, future employers — not a
+referred small-business prospect. Consulting leads and client-facing portfolio work route to
+`dougrosenbergdev.com` instead. Doug spent 3+ years building ERPs for nonprofits and
+platforms for Fortune 10 companies; the about page still tells that story, but as
+credibility for a technical reader, not a trust-check for a buyer.
 
-Messaging priorities:
+Messaging priorities (still technical-credibility signals, just reframed for a technical
+reader instead of a buyer):
 1. **Clean code** (won't become technical debt)
 2. **Performance** (sub-2-second loads)
-3. **Scalability** (grows with your business)
+3. **Scalability** (architecture that grows with the project)
 4. **Accessibility** (works for everyone)
 5. **No templates** (intentional, not generic)
 
@@ -80,7 +86,8 @@ Messaging priorities:
   studies yet, or a `/blog` with one post, needs an intentional line in the site's voice
   ("First case study coming soon — here's what's in progress") — not a blank page or
   lorem ipsum.
-- **Register: conversational, plain verbs, sentence case.** The reader is a referred
-  small-business owner doing a trust-check (`content-strategy.md`'s framing for `/about`),
-  not a technical audience — tune every sentence to that reader, including on `/work` and
-  `/blog` pages that talk about the build itself.
+- **Register: conversational, plain verbs, sentence case.** The reader is a technical or
+  recruiter-side audience finding the site cold (`content-strategy.md`'s framing) — not a
+  referred small-business owner doing a trust-check. Tune every sentence to that reader,
+  including on `/work` and `/blog` pages that talk about the build itself: build-in-public
+  and teaching voice, not a sales pitch.

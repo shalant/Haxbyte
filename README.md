@@ -1,10 +1,13 @@
 # Haxbyte
 
-Web development consultancy site + content hub. Built by Doug Rosenberg as the
-freelance/consulting brand described in the `career-development` repo's
-[`HAXBYTE_BRAND_PLAN.md`](../career-development/projects/HAXBYTE_BRAND_PLAN.md) — that doc
-is the source of truth for business strategy (positioning, content plan, action items);
-this README is the technical/design brief for the codebase itself.
+Personal technical content brand, built by Doug Rosenberg. Per the 2026-08-14/15 brand split
+described in the `career-development` repo's
+[`HAXBYTE_BRAND_PLAN.md`](../career-development/projects/HAXBYTE_BRAND_PLAN.md), Haxbyte is
+content-only — build-in-public posts and technical notes for a cold/discoverable audience
+(recruiters, engineers, future employers). Consulting leads and client-facing portfolio work
+route to `dougrosenbergdev.com` under Doug's real name instead. That doc is the source of
+truth for business strategy (positioning, content plan, action items); this README is the
+technical/design brief for the codebase itself.
 
 **Status (2026-08-10):** design system decided, stack decided, not yet scaffolded.
 ⚠ **Public launch is blocked** until Doug's friend responds re: using the "Haxbyte" name
@@ -16,17 +19,13 @@ push a live deploy, or register any public handles under the name until that's r
 
 ## What this site does
 
-Two jobs in one:
+Content hub for a cold/discoverable audience — recruiters, engineers, future employers, not
+referred consulting prospects. Home for blog posts and build logs that get repurposed into
+LinkedIn content (build-in-public, teaching, learning-journey posts).
 
-1. **Consulting front door** — where a referred small-business prospect lands, understands
-   what Haxbyte does, sees proof (before/afters, eventually case studies), and makes contact.
-2. **Content hub** — home for blog posts that get repurposed into LinkedIn content
-   (build-in-public, teaching, learning-journey posts).
-
-**Positioning:** lead offering is small business website builds (Squarespace + custom —
-landing pages, redesigns, launches). Workflow apps for SMBs is a later tier once a few
-site wins are banked. SEO is a later upsell to existing clients, not a standalone pitch.
-See the brand plan doc for the full reasoning.
+**Positioning:** build-in-public / teaching voice, technical-credibility signals over sales
+pitch. Consulting positioning, client leads, and portfolio-as-proof-of-skill content live on
+`dougrosenbergdev.com` instead. See the brand plan doc for the full reasoning.
 
 ---
 
@@ -78,8 +77,8 @@ and trust.
 
 **Type:**
 - **Display:** IBM Plex Mono, bold, large scale, tight tracking — headlines. Monospace as a
-  confident hero headline face (not just tiny code snippets) is unusual for a consultancy
-  site and directly honest about the subject.
+  confident hero headline face (not just tiny code snippets) is unusual for a personal
+  engineering site and directly honest about the subject.
 - **Body:** Source Serif 4 (or Lora) — genuine reading comfort for blog/case-study content,
   deliberate contrast against the mechanical mono headlines.
 - **Utility:** IBM Plex Mono, small, letter-spaced caps — labels, dates, "spec" tags
@@ -111,18 +110,18 @@ into one motif specific to Haxbyte.
 
 ## Sitemap & content collections
 
-- `/` — home: hero, 2-3 recent posts, contact CTA
-- `/work` — before/after case studies and portfolio pieces
+- `/` — home: hero, recent posts
+- `/work` — build logs: write-ups on what I built, how, and why
 - `/blog`, `/blog/[slug]` — content hub
-- `/about` — brief story, useful for a referral doing a trust-check
+- `/about` — brief story, tuned for a technical/recruiter reader
 - `/contact`
 
 Content collections: `blog` (title, date, tag: build-in-public / teaching / case-study /
 learning), `work` (client type, before/after images, short writeup).
 
-**Content format priorities** (from the brand plan, highest-leverage first): before/after
-or WIP progress shots → case study breakdowns → teaching/process posts → build-in-public
-learning posts. Full reasoning in the brand plan doc.
+**Content format priorities** (from the brand plan): before/after or WIP progress shots →
+case study breakdowns → teaching/process posts → build-in-public learning posts. Full
+reasoning in the brand plan doc.
 
 ---
 

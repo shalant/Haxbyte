@@ -31,8 +31,8 @@ technical craft into something a non-technical small-business owner can read and
 ## Type
 
 - **Display:** IBM Plex Mono, bold, large scale, tight tracking — headlines. Monospace as a
-  confident hero headline face (not just tiny code snippets) is unusual for a consultancy
-  site and directly honest about the subject.
+  confident hero headline face (not just tiny code snippets) is unusual for a personal
+  engineering site and directly honest about the subject.
 - **Body:** Source Serif 4 (or Lora) — genuine reading comfort for blog/case-study content,
   deliberate contrast against the mechanical mono headlines.
 - **Utility:** IBM Plex Mono, small, letter-spaced caps — labels, dates, "spec" tags
