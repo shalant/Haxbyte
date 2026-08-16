@@ -37,18 +37,21 @@ Semantic theme tokens (flip between light/dark; drive body background/text, nav,
 footer, and the hero's trace treatment) — `--bg`, `--surface`, `--surface-2` /
 `--surface-2-soft` (fixed dark "screen" chrome for code blocks, constant in both themes),
 `--text`, `--text-muted`, `--line`, `--trace-color`, `--trace-opacity`, `--shadow-1/2/3`,
-`--card-border`, `--nav-glass`, `--nav-border`. Defined in `site/src/styles/tokens.css`:
-light values on bare `:root`, dark values under `@media (prefers-color-scheme: dark)`
-(guarded so an explicit light choice wins) and again under `:root[data-theme="dark"]` so the
-in-page toggle wins in both directions. The toggle persists its choice to `localStorage` and
-applies it before paint to avoid a flash of the wrong theme.
+`--card-border`, `--nav-glass`, `--nav-border`, `--link`, `--link-orange`. Defined in
+`site/src/styles/tokens.css`: light values on bare `:root`, dark values under
+`@media (prefers-color-scheme: dark)` (guarded so an explicit light choice wins) and again
+under `:root[data-theme="dark"]` so the in-page toggle wins in both directions. The toggle
+persists its choice to `localStorage` and applies it before paint to avoid a flash of the
+wrong theme.
 
 Accents (`--signal`, `--spark`) intentionally do **not** flip — only neutrals and the trace
-treatment do. `--signal` (teal) has strong contrast on the dark palette (~10:1) but weak
-contrast on the light palette (~1.6:1) — treat it as a dark-surface/decorative color, not a
-light-mode text or link color. (The current global `a { color: var(--signal) }` rule in
-`tokens.css` predates this finding and fails contrast on `--paper` — flagged as a known
-issue, not yet fixed, since fixing it changes every link site-wide.)
+treatment do. Both fail WCAG AA as TEXT color on the light palette despite being fine on
+dark (`--signal` teal: ~10:1 on dark, ~1.6:1 on light; `--spark` orange: ~6:1 on dark, ~2.7:1
+on light) — **resolved 2026-08-16** via `--link` (`#0D5A4F` light / `#2DD4BF` dark) and
+`--link-orange` (`#B4441C` light / `#E8703F` dark), theme-aware darkened stand-ins used
+anywhere the accent is TEXT (links, tags, eyebrows, CTA button backgrounds). Rule of thumb:
+`--signal`/`--spark` for decorative/icon/dark-surface/graphic use, `--link`/`--link-orange`
+for anything that's actually text a reader needs to read.
 
 ## Type
 

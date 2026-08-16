@@ -55,6 +55,15 @@
 	--nav-glass: rgba(238, 241, 239, 0.68);
 	--nav-border: rgba(11, 18, 32, 0.08);
 
+	/* Accessible stand-in for --signal as TEXT color. --signal (#2DD4BF) has
+	   ~10:1 contrast on the dark palette but only ~1.6:1 on the light one —
+	   fails WCAG AA (needs 4.5:1) badly. Use --link wherever teal is a link/
+	   text color; keep --signal for decorative/icon/dark-surface uses where
+	   the light-mode failure doesn't apply. */
+	--link: #0D5A4F;
+	/* Same problem, --spark family: 2.7:1 on light, fine (6:1) on dark. */
+	--link-orange: #B4441C;
+
 	/* Typography Scale */
 	--text-xs: 0.75rem;
 	--text-sm: 0.875rem;
@@ -117,6 +126,8 @@
 		--card-border: rgba(45, 212, 191, 0.16);
 		--nav-glass: rgba(11, 18, 32, 0.55);
 		--nav-border: rgba(45, 212, 191, 0.14);
+		--link: #2DD4BF;
+		--link-orange: #E8703F;
 	}
 }
 :root[data-theme="dark"] {
@@ -133,6 +144,8 @@
 	--card-border: rgba(45, 212, 191, 0.16);
 	--nav-glass: rgba(11, 18, 32, 0.55);
 	--nav-border: rgba(45, 212, 191, 0.14);
+	--link: #2DD4BF;
+	--link-orange: #E8703F;
 }
 
 /* Base Styles */
@@ -190,7 +203,7 @@ h5, h6 {
 
 /* Links */
 a {
-	color: var(--signal);
+	color: var(--link);
 	text-decoration: underline;
 	transition: opacity var(--duration-normal);
 }

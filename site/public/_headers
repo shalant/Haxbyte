@@ -1,0 +1,22 @@
+# Cloudflare Pages security headers — https://developers.cloudflare.com/pages/configuration/headers/
+#
+# CSP script-src is locked down with sha256 hashes for the two inline
+# scripts in src/layouts/Base.astro (theme-flash prevention + the toggle
+# handler) instead of 'unsafe-inline'. If those scripts change, regenerate
+# the hashes: `npm run build`, then for each `<script>`/`<script type="module">`
+# block in dist/index.html:
+#   python -c "import hashlib,base64;print('sha256-'+base64.b64encode(hashlib.sha256(open('SCRIPT.js','rb').read() if False else b'PASTE_EXACT_SCRIPT_BODY').digest()).decode())"
+# or any equivalent sha256 + base64 tool over the exact script body text.
+#
+# https://static.cloudflareinsights.com / https://cloudflareinsights.com are
+# allowed for Cloudflare Web Analytics (enable via the Pages dashboard —
+# no code change needed, it self-injects). Remove those two entries from
+# the CSP if Web Analytics is ever turned off.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-lgT9yb2cprrp6qHdhLadjC7CUS700emnHdI7Y0mMUrI=' 'sha256-WUH6JgNPy5hxu8Jl7/mMszHhD/rAW71IVYWvuBLGOeg=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
