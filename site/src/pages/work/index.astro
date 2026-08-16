@@ -52,7 +52,7 @@ const sortedWork = workPieces.sort((a, b) => {
 
 	.work-header {
 		margin-bottom: var(--space-3xl);
-		border-bottom: 1px solid rgba(11, 18, 32, 0.1);
+		border-bottom: 1px solid var(--line);
 		padding-bottom: var(--space-2xl);
 	}
 
@@ -61,7 +61,7 @@ const sortedWork = workPieces.sort((a, b) => {
 	}
 
 	.work-header p {
-		color: var(--ash);
+		color: var(--text-muted);
 		font-size: var(--text-lg);
 		margin: 0;
 	}
@@ -74,17 +74,17 @@ const sortedWork = workPieces.sort((a, b) => {
 	}
 
 	.work-card {
-		border: 1px solid rgba(11, 18, 32, 0.1);
+		border: 1px solid var(--line);
 		border-radius: var(--radius-md);
 		padding: var(--space-lg);
-		background-color: var(--white);
+		background-color: var(--surface);
 		display: flex;
 		flex-direction: column;
 		transition: box-shadow var(--duration-normal);
 	}
 
 	.work-card:hover {
-		box-shadow: 0 4px 12px rgba(11, 18, 32, 0.1);
+		box-shadow: 0 4px 12px var(--shadow-2);
 	}
 
 	.work-card h2 {
@@ -93,7 +93,7 @@ const sortedWork = workPieces.sort((a, b) => {
 	}
 
 	.work-card h2 a {
-		color: var(--ink);
+		color: var(--text);
 		text-decoration: none;
 	}
 
@@ -110,7 +110,7 @@ const sortedWork = workPieces.sort((a, b) => {
 	}
 
 	.description {
-		color: var(--ash);
+		color: var(--text-muted);
 		font-size: var(--text-base);
 		margin: 0 0 var(--space-md) 0;
 		flex-grow: 1;
@@ -148,7 +148,7 @@ const sortedWork = workPieces.sort((a, b) => {
 
 	.no-work {
 		text-align: center;
-		color: var(--ash);
+		color: var(--text-muted);
 		padding: var(--space-3xl) 0;
 	}
 </style>
