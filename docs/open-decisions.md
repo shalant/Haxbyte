@@ -17,9 +17,9 @@
       projects — quoted) — belongs on `dougrosenbergdev.com`, not here, per the content/
       consulting split above. Noted 2026-08-15 as a forward pointer for whenever that site
       gets built out; not started anywhere yet.
-- [ ] **Friend's response re: the "Haxbyte" name** — blocks public launch, not local build.
-      Coined jointly; this is a personal courtesy question, not a legal one. See the brand
-      plan doc for full context.
+- [x] ~~**Friend's response re: the "Haxbyte" name**~~ — **resolved 2026-08-16.** Friend
+      never responded; Doug is comfortable proceeding with the name regardless. No longer
+      blocks public launch. See the brand plan doc for full context.
 - [x] ~~DALL-E asset pack vs. hand-authored logo~~ — **resolved 2026-08-11, discarded.** The
       `haxbyte-web-asset-pack/` extraction was broken, not just low-fidelity (`haxbyte-mark.png`
       turned out to be a solid teal square with a stray `>` fragment, not the actual mark).
@@ -34,8 +34,8 @@
       a stylized 3D render, not flat art) and for freelancer/manual-trace options. No DALL-E
       credits needed for this step.
 
-## Launch blocker
+## Launch blocker — resolved
 
-**Public launch is blocked** until Doug's friend responds re: using the "Haxbyte" name.
-Fine to build/scaffold locally in the meantime — **do not** register public DNS, push a
-live deploy, or register any public handles under the name until that's resolved.
+**Resolved 2026-08-16.** The friend's-name courtesy question no longer blocks public
+launch (friend never responded; Doug is proceeding with the name regardless). Public DNS,
+a live deploy, and public handles under the "Haxbyte" name are all fine to proceed with now.

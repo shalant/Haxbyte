@@ -35,8 +35,10 @@ Design and build for the smallest viewport first, then progressively enhance up 
 - Navigation must be obvious at a glance; no hidden/hamburger-only nav on desktop, no more
   than one level of nesting.
 - Responsive grids for every screen size, not fixed pixel widths.
-- High contrast text — verify against the color tokens in `docs/design-system.md` (e.g.
-  `--ash` on `--paper` needs a contrast check before use for body copy, not just headlines).
+- High contrast text — verify against the color tokens in `docs/design-system.md`.
+  `--ash` on `--paper` checked 2026-08-16: ~5:1, fine. `--signal`/`--spark` as TEXT color
+  were found failing (~1.6:1 / ~2.7:1 on light) and fixed via `--link`/`--link-orange` — see
+  design-system.md's Color section for which token to use where.
 
 ## Accessibility
 
@@ -53,6 +55,10 @@ Design and build for the smallest viewport first, then progressively enhance up 
   `http://` resources.
 - No secrets/API keys committed to the repo, ever — use Cloudflare Pages environment
   variables/secrets for anything sensitive (e.g. a future contact-form backend).
+- Security headers set via `site/public/_headers` (Cloudflare Pages' header-injection
+  mechanism): CSP (script-src pinned to sha256 hashes of the two inline scripts in
+  `Base.astro`, not `'unsafe-inline'` — regenerate the hashes if those scripts change),
+  `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS.
 - Whatever the contact method turns out to be (see `docs/open-decisions.md`), it must not
   collect more visitor data than the stated purpose requires, and must not log or store
   submissions anywhere insecure.
