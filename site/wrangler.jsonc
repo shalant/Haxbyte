@@ -7,6 +7,11 @@
 	"name": "haxbyte",
 	"compatibility_date": "2026-08-16",
 	"assets": {
-		"directory": "./dist"
+		"directory": "./dist",
+		// Without this, unmatched routes get a bare 404 with an empty body
+		// instead of the built dist/404.html — Workers static assets
+		// defaults to "none", unlike classic Pages which served 404.html
+		// automatically.
+		"not_found_handling": "404-page"
 	}
 }

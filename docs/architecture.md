@@ -9,8 +9,12 @@
   control over a distinctive visual system.
 - **View Transitions API** (Astro's built-in `<ClientRouter />`) for smooth page/section
   transitions — native browser support, no animation library required.
-- **Cloudflare Pages** for hosting — free tier covers this site's traffic entirely, git-push
-  deploy, global CDN.
+- **Cloudflare** for hosting — free tier covers this site's traffic entirely, git-push
+  deploy, global CDN. Deployed 2026-08-16 via Cloudflare's unified "Workers & Pages" flow
+  (classic Pages' dashboard fields have been replaced by a Wrangler-based Workers
+  static-assets deploy — see `site/wrangler.jsonc` and `docs/TODO.md`'s Cloudflare setup
+  notes), not the original "Cloudflare Pages" product this doc was written against; the
+  hosting rationale below is unchanged.
   - Rejected: Azure Static Web Apps (Doug's day-job stack — would work, but is more
     infrastructure than a static marketing site needs, and undercuts the "deployed for $0"
     content angle).

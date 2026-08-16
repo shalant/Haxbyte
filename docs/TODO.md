@@ -25,11 +25,16 @@ connection are dashboard steps Doug needs to do manually.
 - [x] Resolve name approval with friend — resolved 2026-08-16, friend never responded, Doug
       proceeding with the name regardless (see `docs/open-decisions.md`)
 - [x] Domain — Doug already owns `haxbyte.com`, no purchase needed
-- [ ] Set up Cloudflare Pages deployment from `main` branch — dashboard step, needs Doug's
-      Cloudflare login; connect the GitHub repo, build command `npm run build` (run from
-      `site/`), output directory `site/dist`
+- [x] Set up Cloudflare deployment from `main` branch — done 2026-08-16. Cloudflare's
+      dashboard has moved from classic Pages (build-output-directory field) to a unified
+      "Workers & Pages" flow that deploys via Wrangler instead — connect the GitHub repo,
+      set Path to `/site` (their "root directory" field, under Advanced settings), build
+      command `npm run build`, deploy command `npx wrangler deploy` (default, picks up
+      `site/wrangler.jsonc`, added this session, which points it at `./dist`). Build
+      succeeded (30 files uploaded). `site/public/_headers` (CSP etc.) is confirmed still
+      supported under Workers static-assets, not just classic Pages.
 - [ ] Configure custom domain (haxbyte.com) — dashboard/DNS step, after the above
-- [ ] Enable Cloudflare Web Analytics — dashboard toggle on the Pages project (Analytics →
+- [ ] Enable Cloudflare Web Analytics — dashboard toggle on the Workers project (Analytics →
       Web Analytics → add site), no code change needed; chosen over Google Analytics/
       Plausible for zero-config + no cookie-consent requirement
 
