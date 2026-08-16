@@ -1,9 +1,10 @@
 # Haxbyte Project TODO
 
-**Last updated:** 2026-08-15  
-**Status:** Homepage + nav/footer rebuilt on a real light/dark theme system, ready to PR.
-Still blocked on the friend's-name launch constraint (see Notes) — **not** ready to deploy
-publicly yet regardless of code state.
+**Last updated:** 2026-08-16  
+**Status:** Homepage + nav/footer rebuilt on a real light/dark theme system (merged). Launch
+blocker resolved — working through the remaining pre-deployment checklist now (Cloudflare
+Pages setup, accessibility/security pass, analytics). Domain purchase and Cloudflare project
+connection are dashboard steps Doug needs to do manually.
 
 **Recent work (2026-08-15):**
 - ✅ Font direction settled: IBM Plex Mono (display/utility) + Source Serif 4 (body), now
@@ -21,11 +22,16 @@ publicly yet regardless of code state.
 
 ## 🚀 Launch Phase (Blocking)
 
-- [ ] Resolve name approval with friend (launch blocker — Doug's day job hours constraint applies)
-- [ ] Purchase haxbyte.com domain (or verify if already purchased)
-- [ ] Set up Cloudflare Pages deployment from main branch
-- [ ] Configure custom domain (haxbyte.com)
-- [ ] Set up analytics (Google Analytics or Plausible)
+- [x] Resolve name approval with friend — resolved 2026-08-16, friend never responded, Doug
+      proceeding with the name regardless (see `docs/open-decisions.md`)
+- [x] Domain — Doug already owns `haxbyte.com`, no purchase needed
+- [ ] Set up Cloudflare Pages deployment from `main` branch — dashboard step, needs Doug's
+      Cloudflare login; connect the GitHub repo, build command `npm run build` (run from
+      `site/`), output directory `site/dist`
+- [ ] Configure custom domain (haxbyte.com) — dashboard/DNS step, after the above
+- [ ] Enable Cloudflare Web Analytics — dashboard toggle on the Pages project (Analytics →
+      Web Analytics → add site), no code change needed; chosen over Google Analytics/
+      Plausible for zero-config + no cookie-consent requirement
 
 ### SEO Fundamentals
 - [x] Create `robots.txt` (allow all, point to sitemap)
@@ -48,9 +54,20 @@ publicly yet regardless of code state.
 - [ ] No horizontal scroll on any viewport
 
 ### Accessibility & Performance
-- [ ] Verify WCAG 2.1 AA accessibility (automated + manual testing)
+- [x] Manual contrast audit (2026-08-16) — found and fixed a real WCAG AA failure: the
+      brand accent colors (`--signal` teal, `--spark` orange) were being used directly as
+      TEXT color on light backgrounds in 10 places (global link color, nav active-state,
+      footer links, tag pills, CTA buttons, etc.) — as low as ~1.6:1 against the 4.5:1
+      requirement. Added `--link`/`--link-orange` (darkened, theme-aware) tokens for text/
+      link use; `--signal`/`--spark` stay as-is for decorative/icon/dark-surface uses.
+      `--ash` on `--paper` (already flagged as worth checking) verified fine at ~5:1.
+- [ ] Automated accessibility scan (axe/Lighthouse) — the manual pass above covers what was
+      visible; still worth an automated sweep for anything missed (focus order, ARIA, etc.)
 - [ ] Performance audit (Lighthouse, Core Web Vitals)
-- [ ] Security checklist (SSL, headers, no secrets in repo)
+- [x] Security headers — added `site/public/_headers` (CSP with sha256-pinned inline
+      scripts, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS). SSL is automatic
+      via Cloudflare Pages; no secrets in repo (verified, `.gitignore` covers `.env`); no
+      contact-form backend yet so no data-handling surface to audit there
 
 ### Launch
 - [ ] Launch announcement (LinkedIn post, share with network)
@@ -155,7 +172,7 @@ and `sonus-construction.md` still exist and still get built into `/work` today.
 
 ## Notes
 
-- **Launch blocker:** Friend's approval on "Haxbyte" name (not legal, personal courtesy)
+- **Launch blocker:** resolved 2026-08-16 — see `docs/open-decisions.md`
 - **Git constraint:** No commits 8:30am–5pm CT, Mon–Fri (Doug's day job)
 - **Docs rule:** Keep docs/ in sync with code changes (implemented 2026-08-11)
 - **Brand assets:** Logo SVGs need redraw from DALL-E reference (not critical for launch)

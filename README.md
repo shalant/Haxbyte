@@ -9,11 +9,10 @@ route to `dougrosenbergdev.com` under Doug's real name instead. That doc is the 
 truth for business strategy (positioning, content plan, action items); this README is the
 technical/design brief for the codebase itself.
 
-**Status (2026-08-10):** design system decided, stack decided, not yet scaffolded.
-⚠ **Public launch is blocked** until Doug's friend responds re: using the "Haxbyte" name
-(coined jointly, personal courtesy question, not a legal one — see the brand plan doc for
-full context). Fine to build/scaffold locally in the meantime; do not register public DNS,
-push a live deploy, or register any public handles under the name until that's resolved.
+**Status (2026-08-16):** scaffolded and in active development (Astro project in `site/`).
+The friend's-name launch blocker is resolved — friend never responded, Doug is proceeding
+with the name regardless — so public deploy is no longer blocked. See
+[`docs/open-decisions.md`](./docs/open-decisions.md) for details and remaining open items.
 
 ---
 
@@ -127,8 +126,5 @@ reasoning in the brand plan doc.
 
 ## Open decisions
 
-- [ ] Contact method: mailto/Calendly vs. on-page form
-- [ ] Domain consolidation across the four owned domains (haxbyte.com, dougrosenbergdev.com,
-      drpcconsulting.com, dougrosenbergarchive.com) — tracked in the brand plan doc, not
-      resolved yet
-- [ ] Friend's response re: the Haxbyte name — blocks public launch, not local build
+See [`docs/open-decisions.md`](./docs/open-decisions.md) for the current, single-source
+list (this section previously duplicated it and had drifted out of sync).

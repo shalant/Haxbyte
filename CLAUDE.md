@@ -13,13 +13,12 @@ pseudonymity.
 system; several pages still carry pre-brand-split copy or haven't been converted to the
 theme tokens yet — see "Known gaps" in `docs/design-system.md` for the current list.
 
-## ⚠ Launch constraint
+## Launch status
 
-Public launch is blocked until Doug's friend responds re: using the "Haxbyte" name (coined
-jointly — a personal courtesy question, not a legal one). Fine to build/scaffold locally.
-**Do not** register public DNS, push a live deploy, or register any public handles under
-the "Haxbyte" name until that's resolved. Full detail in
-[`docs/open-decisions.md`](./docs/open-decisions.md).
+**Resolved 2026-08-16:** the friend's-name courtesy question that previously blocked public
+launch is closed — Doug's friend never responded, and Doug is comfortable proceeding with
+the "Haxbyte" name regardless. Public deploy (custom domain, DNS, public handles) is no
+longer blocked. Full history in [`docs/open-decisions.md`](./docs/open-decisions.md).
 
 ## Docs
 
@@ -36,8 +35,7 @@ the "Haxbyte" name until that's resolved. Full detail in
 - [`docs/frontend-principles.md`](./docs/frontend-principles.md) — visual craft discipline
   (how to execute the design system without drifting generic) and the copy/voice rules for
   all site text.
-- [`docs/open-decisions.md`](./docs/open-decisions.md) — unresolved items, including the
-  launch blocker above.
+- [`docs/open-decisions.md`](./docs/open-decisions.md) — remaining unresolved items.
 
 ## Source of truth for business strategy
 
