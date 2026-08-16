@@ -61,9 +61,11 @@ connection are dashboard steps Doug needs to do manually.
       requirement. Added `--link`/`--link-orange` (darkened, theme-aware) tokens for text/
       link use; `--signal`/`--spark` stay as-is for decorative/icon/dark-surface uses.
       `--ash` on `--paper` (already flagged as worth checking) verified fine at ~5:1.
-- [ ] Automated accessibility scan (axe/Lighthouse) — the manual pass above covers what was
-      visible; still worth an automated sweep for anything missed (focus order, ARIA, etc.)
-- [ ] Performance audit (Lighthouse, Core Web Vitals)
+- [x] Lighthouse audit (2026-08-16, local production build via `astro preview`) — 100/100
+      across Performance, Accessibility, Best Practices, and SEO. Core Web Vitals: LCP
+      1.66s, FCP 1.07s, TBT 0ms, CLS 0 — comfortably under the 2s target. Local-machine
+      numbers, not real-network-to-Cloudflare-edge, but confirms no code-level bloat; worth
+      re-running once actually deployed for real-world numbers.
 - [x] Security headers — added `site/public/_headers` (CSP with sha256-pinned inline
       scripts, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS). SSL is automatic
       via Cloudflare Pages; no secrets in repo (verified, `.gitignore` covers `.env`); no
