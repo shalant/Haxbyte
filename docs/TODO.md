@@ -46,8 +46,17 @@ connection are dashboard steps Doug needs to do manually.
 ### Mobile Testing (Critical)
 - [ ] Test on real iPhone (Safari)
 - [ ] Test on real Android device (Chrome)
-- [ ] Verify touch targets are 44×44px minimum (all buttons, links, nav)
-- [ ] Test mobile navigation (wraps to two centered rows below 40rem, not a hamburger — verify no overlap on real devices)
+- [x] Verify touch targets are 44×44px minimum (all buttons, links, nav) — audited
+      2026-08-16: found the theme toggle (32×32px), nav links, and footer links all under
+      the minimum (no padding beyond a thin underline offset). Fixed: theme toggle is now
+      44×44px, `.nav-links a` / `.footer-links a` get `min-height: 44px` + padding, homepage
+      pill CTA padding bumped to clear 44px. `about`/`404` CTA buttons and card-heading links
+      were already well over the minimum, left as-is. Verified via computed
+      `getBoundingClientRect()` in Chrome, not a real device — window-resize browser
+      automation wasn't producing a real mobile viewport in this environment (innerWidth
+      stayed pinned to desktop width regardless of resize_window calls), so this was a
+      code-level fix, not a visual mobile pass. Real-device confirmation still needed.
+- [ ] Test mobile navigation (wraps to two centered rows below 40rem, not a hamburger — verify no overlap on real devices; simulated via injected CSS media-query override 2026-08-16, wraps cleanly with no overlap, but still needs a real-device check)
 - [ ] Test all pages: home, about, contact, blog, work, work detail
 - [ ] Verify forms are mobile-friendly (if applicable)
 - [ ] Test orientation changes (portrait/landscape)

@@ -195,12 +195,15 @@ const ogImageURL = new URL(image, Astro.site);
 	}
 
 	.nav-links a {
+		display: inline-flex;
+		align-items: center;
 		color: var(--text-muted);
 		text-decoration: none;
 		font-size: var(--text-sm);
 		transition: color var(--duration-normal);
 		position: relative;
-		padding-bottom: var(--space-xs);
+		min-height: 44px;
+		padding: var(--space-sm) var(--space-2xs);
 	}
 
 	.nav-links a:hover {
@@ -215,9 +218,9 @@ const ogImageURL = new URL(image, Astro.site);
 	.nav-links a[aria-current="page"]::after {
 		content: '';
 		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
+		bottom: var(--space-xs);
+		left: var(--space-2xs);
+		right: var(--space-2xs);
 		height: 2px;
 		background-color: var(--spark);
 		border-radius: 1px;
@@ -227,8 +230,8 @@ const ogImageURL = new URL(image, Astro.site);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 32px;
-		height: 32px;
+		width: 44px;
+		height: 44px;
 		border-radius: var(--radius-md);
 		border: 1px solid var(--nav-border);
 		background: none;
@@ -243,8 +246,8 @@ const ogImageURL = new URL(image, Astro.site);
 	}
 
 	.theme-toggle svg {
-		width: 16px;
-		height: 16px;
+		width: 18px;
+		height: 18px;
 		stroke: currentColor;
 		fill: none;
 		stroke-width: 1.6;
@@ -302,10 +305,15 @@ const ogImageURL = new URL(image, Astro.site);
 
 	.footer-links {
 		display: flex;
+		align-items: center;
 		gap: var(--space-lg);
 	}
 
 	.footer-links a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		padding: var(--space-sm) var(--space-2xs);
 		color: var(--link);
 		text-decoration: none;
 		font-size: var(--text-sm);
