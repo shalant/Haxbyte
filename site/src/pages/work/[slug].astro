@@ -47,7 +47,7 @@ const { piece } = Astro.props;
 
 	.piece-header {
 		margin-bottom: var(--space-3xl);
-		border-bottom: 1px solid rgba(11, 18, 32, 0.1);
+		border-bottom: 1px solid var(--line);
 		padding-bottom: var(--space-2xl);
 	}
 
@@ -62,12 +62,12 @@ const { piece } = Astro.props;
 		flex-wrap: wrap;
 		font-family: 'IBM Plex Mono', monospace;
 		font-size: var(--text-sm);
-		color: var(--ash);
+		color: var(--text-muted);
 	}
 
 	.client {
 		font-weight: 600;
-		color: var(--ink);
+		color: var(--text);
 	}
 
 	.tags {
