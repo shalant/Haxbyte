@@ -3,43 +3,94 @@ import Base from '../layouts/Base.astro';
 import PulseLine from '../components/PulseLine.astro';
 import { getCollection } from 'astro:content';
 
-const blogPosts = await getCollection('blog');
+const blogPosts = await getCollection('blog', ({ data }) => !data.draft);
 const recentPosts = blogPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
+
+const tagLabels: Record<string, string> = {
+	'build-in-public': 'Build-in-public',
+	teaching: 'Teaching',
+	'case-study': 'Case study',
+	learning: 'Learning',
+};
+
+const steps = [
+	{
+		title: 'Scope it in writing',
+		body: "A one-page brief before any code — what it needs to do, what it explicitly doesn't, and how we'll know it's done.",
+	},
+	{
+		title: 'Build the thin slice',
+		body: 'One real path end-to-end before any polish — proves the architecture holds before there\'s a UI worth admiring.',
+	},
+	{
+		title: "Load it like it's real",
+		body: 'Performance and edge cases get tested against real numbers, not the happy path on a laptop.',
+	},
+	{
+		title: 'Ship, then write it up',
+		body: "What shipped, what changed from the plan, and why — while it's still fresh enough to be honest about.",
+	},
+];
 ---
 
 <Base>
-	<!-- Hero Section -->
-	<section class="hero">
+	<!-- Hero -->
+	<header class="hero">
+		<svg class="traces" viewBox="0 0 1120 400" preserveAspectRatio="none" aria-hidden="true">
+			<path class="t1" d="M-20,60 L180,60 L200,80 L200,140 L260,140 L280,160 L280,260 L340,260" />
+			<path class="t2" d="M1140,120 L920,120 L900,100 L900,50 L840,50 L820,30 L780,30" />
+			<path class="t3" d="M-20,340 L120,340 L140,320 L220,320 L240,300 L400,300" />
+		</svg>
 		<div class="hero-inner">
-			<div class="hero-mark">
-				<img src="/haxbyte-mark.png" alt="Haxbyte mark" class="hero-logo" />
-			</div>
-			<div class="hero-content">
-				<h1>I build things and write about how.</h1>
-				<p>Build logs, technical notes, and the occasional deep dive — including how I ship on a $0/month budget.</p>
-			</div>
-			<PulseLine variant="hero" />
+			<p class="eyebrow">Build in public &mdash; Haxbyte</p>
+			<h1 class="headline">
+				<span class="line"><span style="animation-delay:60ms">Code that outlives</span></span>
+				<span class="line"><span style="animation-delay:180ms">the sprint.</span></span>
+			</h1>
+			<p class="hero-sub">Build logs from an engineer working the full stack &mdash; enterprise ERPs by day, small honest builds like this one in the open.</p>
+			<a class="pill-cta" href="#recent-posts">Read the build log &rarr;</a>
 		</div>
-	</section>
+	</header>
 
 	<PulseLine variant="divider" />
 
 	<!-- Recent Posts -->
-	<section class="recent-posts container">
-		<h2>Latest posts</h2>
-		<div class="posts-grid">
+	<section class="recent-posts container-full" id="recent-posts">
+		<div class="section-head container">
+			<h2>Recent build logs</h2>
+			<a class="see-all" href="/blog">All posts &rarr;</a>
+		</div>
+		<div class="posts-grid container">
 			{recentPosts.map(post => (
 				<article class="post-card">
-					<h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
-					<time datetime={post.data.date.toISOString()}>
-						{post.data.date.toLocaleDateString('en-US', {
-							year: 'numeric',
-							month: 'long',
-							day: 'numeric',
-						})}
-					</time>
-					{post.data.description && <p>{post.data.description}</p>}
+					<div class="post-body">
+						{post.data.tags[0] && <p class="post-tag">{tagLabels[post.data.tags[0]] ?? post.data.tags[0]}</p>}
+						<h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
+						{post.data.description && <p class="post-desc">{post.data.description}</p>}
+						<div class="post-foot">
+							<time datetime={post.data.date.toISOString()}>
+								{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+							</time>
+							<a class="post-arrow" href={`/blog/${post.id}`}>Read &rarr;</a>
+						</div>
+					</div>
 				</article>
+			))}
+		</div>
+	</section>
+
+	<!-- How I build it -->
+	<section class="steps-section container">
+		<div class="section-head">
+			<h2>How I build it</h2>
+		</div>
+		<div class="steps">
+			{steps.map((step, i) => (
+				<div class="step-row">
+					<span class="step-num">{String(i + 1).padStart(2, '0')}</span>
+					<h3>{step.title}</h3>
+					<p>{step.body}</p>
+				</div>
 			))}
 		</div>
 	</section>
@@ -47,89 +98,215 @@ const recentPosts = blogPosts.sort((a, b) => b.data.date.getTime() - a.data.date
 
 <style>
 	.hero {
-		background-color: var(--ink);
-		color: var(--white);
-		padding: var(--space-5xl) var(--space-md);
+		position: relative;
+		overflow: hidden;
+		padding: clamp(3.4rem, 8vw, 5.5rem) var(--space-md) clamp(2.6rem, 6vw, 3.6rem);
+	}
+
+	.traces {
+		position: absolute;
+		inset: 0;
+		opacity: var(--trace-opacity);
+		pointer-events: none;
+		transition: opacity var(--duration-normal);
+	}
+	.traces path { stroke: var(--trace-color); stroke-width: 1; fill: none; }
+	.traces .t1 { stroke-dasharray: 5 240; animation: trace 5.5s linear infinite; }
+	.traces .t2 { stroke-dasharray: 5 260; animation: trace 6.5s linear infinite; animation-delay: -2s; }
+	.traces .t3 { stroke-dasharray: 5 200; animation: trace 4.5s linear infinite; animation-delay: -3.5s; }
+	@keyframes trace { to { stroke-dashoffset: -460; } }
+
+	.hero-inner {
+		position: relative;
+		max-width: var(--max-width-prose);
+		margin: 0 auto;
 		text-align: center;
 	}
 
-	.hero-inner {
-		max-width: var(--max-width-prose);
-		margin: 0 auto;
+	.eyebrow {
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: 0.74rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--spark);
+		margin: 0 0 var(--space-md);
 	}
 
-	.hero-mark {
-		margin-bottom: var(--space-3xl);
-		display: flex;
-		justify-content: center;
+	.headline {
+		font-family: 'IBM Plex Mono', monospace;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		line-height: 1.08;
+		font-size: clamp(2.3rem, 6.4vw, 4rem);
+		margin: 0 0 var(--space-lg);
 	}
-
-	.hero-logo {
-		height: 120px;
-		width: auto;
-		filter: drop-shadow(0 4px 12px rgba(45, 212, 191, 0.3));
+	.headline .line { display: block; overflow: hidden; }
+	.headline .line span {
+		display: inline-block;
+		opacity: 0;
+		transform: translateY(105%);
+		animation: reveal 640ms cubic-bezier(.2,.8,.2,1) forwards;
 	}
+	@keyframes reveal { to { opacity: 1; transform: translateY(0); } }
 
-	.hero-content {
-		max-width: var(--max-width-prose);
-		margin: 0 auto var(--space-3xl);
-	}
-
-	.hero h1 {
-		color: var(--white);
-		margin: 0 0 var(--space-md) 0;
-		font-size: var(--text-6xl);
-	}
-
-	.hero p {
+	.hero-sub {
 		font-size: var(--text-xl);
-		color: var(--paper);
+		line-height: 1.65;
+		color: var(--text-muted);
+		max-width: 46ch;
+		margin: 0 auto var(--space-xl);
+	}
+
+	.pill-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-xs);
+		background: var(--signal);
+		color: #06231F;
+		font-family: 'IBM Plex Mono', monospace;
+		font-weight: 700;
+		font-size: 0.78rem;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
+		text-decoration: none;
+		padding: 0.75rem 1.3rem;
+		border-radius: 999px;
+		transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+	}
+	.pill-cta:hover {
+		transform: scale(1.04) rotate(-1deg);
+		box-shadow: 0 8px 22px rgba(45, 212, 191, 0.25);
+		opacity: 1;
+	}
+
+	.container-full { width: 100%; }
+
+	.section-head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-md);
 		margin-bottom: var(--space-lg);
 	}
+	.section-head h2 { margin: 0; font-size: var(--text-2xl); }
+	.section-head .see-all {
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: 0.74rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		text-decoration: none;
+		color: var(--text);
+		position: relative;
+		padding-bottom: 2px;
+		white-space: nowrap;
+	}
+	.section-head .see-all::after {
+		content: '';
+		position: absolute;
+		left: 0; right: 0; bottom: 0;
+		height: 2px;
+		background: var(--spark);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform var(--duration-normal);
+	}
+	.section-head .see-all:hover { opacity: 1; }
+	.section-head .see-all:hover::after { transform: scaleX(1); }
 
 	.recent-posts {
-		padding: var(--space-3xl) var(--space-md);
+		padding: 0 var(--space-md) var(--space-3xl);
+		max-width: 1120px;
+		margin: 0 auto;
 	}
 
 	.posts-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: var(--space-2xl);
-		margin-top: var(--space-2xl);
+		gap: var(--space-lg);
+		max-width: none;
+		padding: 0;
 	}
 
 	.post-card {
-		padding: var(--space-lg);
-		border-left: 4px solid var(--spark);
-		border-radius: var(--radius-md);
-		background-color: var(--white);
-		box-shadow: 0 2px 8px rgba(11, 18, 32, 0.06);
-		transition: all var(--duration-normal);
+		background: var(--surface);
+		border: 1px solid var(--card-border);
+		border-radius: var(--radius-lg);
+		box-shadow: 0 1px 2px var(--shadow-1), 0 8px 20px var(--shadow-2), 0 18px 40px var(--shadow-3);
+		transition: transform var(--duration-normal);
 	}
+	.post-card:hover { transform: translateY(-4px); }
 
-	.post-card:hover {
-		box-shadow: 0 6px 16px rgba(11, 18, 32, 0.12);
-		transform: translateX(4px);
-	}
+	.post-body { padding: var(--space-lg); }
 
-	.post-card h3 {
-		margin-top: 0;
-		margin-bottom: var(--space-sm);
-		font-size: var(--text-lg);
-	}
-
-	.post-card a {
-		color: var(--ink);
-		text-decoration: none;
-	}
-
-	.post-card a:hover {
-		color: var(--spark);
-	}
-
-	.post-card time {
+	.post-tag {
 		font-family: 'IBM Plex Mono', monospace;
-		font-size: var(--text-sm);
-		color: var(--ash);
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--spark);
+		margin: 0 0 var(--space-sm);
+	}
+
+	.post-card h3 { margin: 0 0 var(--space-xs); font-size: var(--text-lg); }
+	.post-card a { color: var(--text); text-decoration: none; }
+	.post-card h3 a:hover { color: var(--spark); }
+
+	.post-desc { font-size: var(--text-base); color: var(--text-muted); margin: 0 0 var(--space-md); }
+
+	.post-foot { display: flex; align-items: center; justify-content: space-between; }
+	.post-foot time { font-family: 'IBM Plex Mono', monospace; font-size: var(--text-xs); color: var(--text-muted); }
+	.post-arrow {
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: 0.8rem;
+		font-weight: 700;
+		color: var(--text);
+		position: relative;
+	}
+	.post-arrow::after {
+		content: '';
+		position: absolute;
+		left: 0; right: 0; bottom: -3px;
+		height: 2px;
+		background: var(--spark);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform var(--duration-normal);
+	}
+	.post-card:hover .post-arrow::after { transform: scaleX(1); }
+
+	/* How I build it — real 4-step sequence, row layout (the one place a
+	   numbered marker is earned; see docs/design-system.md) */
+	.steps-section { max-width: 900px; padding: 0 var(--space-md) var(--space-3xl); }
+
+	.steps { display: flex; flex-direction: column; }
+	.step-row {
+		display: grid;
+		grid-template-columns: 2.6rem 1fr 1.6fr;
+		align-items: baseline;
+		gap: var(--space-lg);
+		padding: var(--space-lg) 0;
+		border-top: 1px solid var(--line);
+	}
+	.step-row:last-child { border-bottom: 1px solid var(--line); }
+	.step-num {
+		font-family: 'IBM Plex Mono', monospace;
+		font-weight: 700;
+		font-size: var(--text-lg);
+		color: var(--signal);
+		font-variant-numeric: tabular-nums;
+	}
+	.step-row h3 { margin: 0; font-size: var(--text-lg); }
+	.step-row p { margin: 0; font-size: var(--text-base); color: var(--text-muted); }
+
+	@media (prefers-reduced-motion: reduce) {
+		.traces path, .headline .line span { animation: none !important; opacity: 1 !important; transform: none !important; }
+	}
+
+	@media (max-width: 46rem) {
+		.step-row { grid-template-columns: 2rem 1fr; }
+		.step-row p { grid-column: 1 / -1; }
 	}
 </style>

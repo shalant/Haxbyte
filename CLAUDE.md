@@ -8,8 +8,10 @@ portfolio work route to `dougrosenbergdev.com` under Doug's real name instead. T
 still names Doug and links his real contact info — the split is about framing/audience, not
 pseudonymity.
 
-**Status:** design system and stack are decided; the project is **not yet scaffolded** —
-no Astro project, no source tree exists yet. This repo currently holds planning docs only.
+**Status:** scaffolded and in active development — the Astro project lives in `site/` (see
+`site/CLAUDE.md` for dev workflow). Homepage, nav, and footer run on a real light/dark theme
+system; several pages still carry pre-brand-split copy or haven't been converted to the
+theme tokens yet — see "Known gaps" in `docs/design-system.md` for the current list.
 
 ## ⚠ Launch constraint
 

@@ -10,23 +10,45 @@ were made from a written description before that concept was pinned down and don
 it — see [`assets/brand/README.md`](./assets/brand/README.md) for specifics and the plan to
 redraw them as flat vectors from the new reference.
 
-The site's design system builds on that but deliberately does **not** extend the
-dark-navy-with-teal logo card across the whole page — that would be both the obvious move
-and a known AI-generated-design cliché (dark bg + single bright accent). Instead: the
-dark/teal world is confined to the hero (where the brand identity lives), handing off into
-a warm, readable, mostly-light body — literally enacting the brand's pitch of translating
-technical craft into something a non-technical small-business owner can read and trust.
+**Updated 2026-08-15:** the site now ships a real light/dark toggle (see Color below), which
+superseded the earlier plan to hardcode a dark "ink" hero regardless of viewer theme — a
+fixed dark hero on an otherwise-toggleable page read as broken/half-switched once the toggle
+existed, and conflicted with the actual goal (one consistent tone per page load, in either
+theme). The hero is distinguished from the body by type and an ambient circuit-trace field
+(ink-colored and faint in light mode, teal and brighter in dark mode) rather than by a
+separate colored container. This still avoids the dark-bg-with-single-accent AI-design
+cliché — the two themes are complete, considered palettes, not "dark mode as an
+afterthought."
 
 ## Color
 
+Brand constants (fixed values, theme-independent):
+
 | Token      | Hex       | Role                                                  |
 |------------|-----------|--------------------------------------------------------|
-| `--ink`    | `#0B1220` | Hero/dark sections, primary text on light               |
-| `--paper`  | `#EEF1EF` | Body background — cool pale sage-gray, not warm cream    |
-| `--signal` | `#2DD4BF` | Brand teal — mostly confined to dark hero + links        |
-| `--spark`  | `#E8703F` | Warm ember accent — one CTA / the signature motif        |
-| `--ash`    | `#5B6A66` | Muted secondary text                                     |
+| `--ink`    | `#0B1220` | Dark brand navy — base for the dark palette below        |
+| `--paper`  | `#EEF1EF` | Light brand neutral — base for the light palette below   |
+| `--signal` | `#2DD4BF` | Brand teal accent — constant across both themes           |
+| `--spark`  | `#E8703F` | Warm ember accent — constant across both themes           |
+| `--ash`    | `#5B6A66` | Muted secondary text (light-mode value)                   |
 | `--white`  | `#FFFFFF` |                                                           |
+
+Semantic theme tokens (flip between light/dark; drive body background/text, nav, cards,
+footer, and the hero's trace treatment) — `--bg`, `--surface`, `--surface-2` /
+`--surface-2-soft` (fixed dark "screen" chrome for code blocks, constant in both themes),
+`--text`, `--text-muted`, `--line`, `--trace-color`, `--trace-opacity`, `--shadow-1/2/3`,
+`--card-border`, `--nav-glass`, `--nav-border`. Defined in `site/src/styles/tokens.css`:
+light values on bare `:root`, dark values under `@media (prefers-color-scheme: dark)`
+(guarded so an explicit light choice wins) and again under `:root[data-theme="dark"]` so the
+in-page toggle wins in both directions. The toggle persists its choice to `localStorage` and
+applies it before paint to avoid a flash of the wrong theme.
+
+Accents (`--signal`, `--spark`) intentionally do **not** flip — only neutrals and the trace
+treatment do. `--signal` (teal) has strong contrast on the dark palette (~10:1) but weak
+contrast on the light palette (~1.6:1) — treat it as a dark-surface/decorative color, not a
+light-mode text or link color. (The current global `a { color: var(--signal) }` rule in
+`tokens.css` predates this finding and fails contrast on `--paper` — flagged as a known
+issue, not yet fixed, since fixing it changes every link site-wide.)
 
 ## Type
 
@@ -41,17 +63,17 @@ technical craft into something a non-technical small-business owner can read and
 ## Layout
 
 ```
-[ INK — full-bleed hero ]
-  logo mark, circuit trace draws itself in on load
-  plain mono headline: what you do, who it's for
-  one CTA
+[ fixed glass nav — blurs whatever scrolls under it, both themes ]
+[ HERO — same surface as the body, not a separate dark block ]
+  ambient circuit-trace field (faint ink in light mode, brighter teal in dark)
+  eyebrow + word-reveal mono headline + one CTA pill
      ⌇⌇⌇  ← pulse-line divider
-[ PAPER — content ]
-  services (plain language, no jargon)
-  work/portfolio — image-forward before/afters
-  "how I build it" — a real 4-step sequence
+[ BODY — same surface as the hero ]
+  recent build logs — image-forward before/afters
+  "how I build it" — a real 4-step sequence (row layout, not cards —
+    a sequence and a post index are different kinds of content)
     (only place numbered markers are justified — no decorative 01/02/03 elsewhere)
-  recent posts / contact
+  contact
 ```
 
 ## Signature element: the pulse-line
@@ -65,14 +87,38 @@ logo's circuit trace. Reused as:
 Ties the logo, the code/circuit subject matter, and a quiet nod to Doug's music background
 (reads as both a circuit trace and a signal waveform) into one motif specific to Haxbyte.
 
-## Implementation status (as of 2026-08-11)
+## Implementation status (as of 2026-08-15)
 
-**Branding fully integrated:**
-- Logo mark in header (32px) + wordmark text
-- Hero section features large mark (120px) with drop-shadow
-- Footer includes mark + social/navigation links
-- Service cards: gradient top border (signal → spark) + hover lift effect
-- Post cards: left border accent in spark + slide-on-hover
-- Footer: signal border-top + gradient background + mark
-- Pulse-line dividers between content sections
-- Brand colors (signal, spark) used throughout for interactive elements and accents
+**Branding integrated, homepage + nav/footer on the new theme system:**
+- Logo mark in header (32px) + wordmark text; footer includes mark + nav links
+- Fixed nav (`position: sticky`) with glassmorphism (`backdrop-filter: blur(14px)
+  saturate(1.5)`, tinted with the page's own bg color per theme, not plain white/black) — a
+  `@supports` fallback swaps in a solid background for browsers without `backdrop-filter`
+- Light/dark toggle (sun/moon icon button in nav) driving `[data-theme]` on `<html>`,
+  persisted to `localStorage`; defaults to system preference via `prefers-color-scheme`
+- Hero: ambient animated circuit-trace SVG field (theme-aware color/opacity), word-by-word
+  headline reveal on load, pill CTA — no separate dark background block (see Color/Layout
+  above)
+- Recent-posts cards and the "how I build it" step rows use the semantic tokens, so they
+  flip correctly with the toggle
+- Fonts self-hosted from `site/public/fonts/` (IBM Plex Mono 400/700, Source Serif 4 400) as
+  `woff2` + `@font-face` in `tokens.css`, replacing the earlier Google Fonts `<link>` — avoids
+  a second CDN/asset host per `docs/engineering-standards.md`
+- Pulse-line dividers between content sections; brand colors (signal, spark) used throughout
+  for interactive elements and accents
+
+**Known gaps, not yet covered by this pass:**
+- `/about`, `/contact`, `/work`, `/blog` pages still use the fixed `--ink`/`--paper` tokens
+  directly rather than the theme-aware `--text`/`--bg` tokens — they render correctly but
+  won't visually respond to the toggle yet (nav/footer will flip around them). Converting
+  them is the natural next PR.
+- The global `a { color: var(--signal) }` link-color rule fails WCAG AA contrast on the light
+  palette (~1.6:1, needs 4.5:1) — see Color above. Pre-existing, not introduced by this pass,
+  not yet fixed since it's a site-wide visual change beyond this PR's scope.
+- `/about` and `/work` (Hardware Etc, Sonus Construction case studies) still carry
+  pre-brand-split copy pitched at SMB consulting clients — stale against the 2026-08-14/15
+  content-only positioning in `docs/frontend-principles.md`. Not touched by this pass since
+  it's a content/copy decision, not a visual one.
+- Nav wraps to two centered rows below `40rem` rather than a true mobile-first collapse —
+  functional and non-overlapping, but the nav (and likely other components) hasn't had a
+  full mobile-first pass yet.
