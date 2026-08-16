@@ -118,6 +118,12 @@ and `sonus-construction.md` still exist and still get built into `/work` today.
 
 ## 🎨 Design & UX Refinements (Medium Priority)
 
+- [ ] Consider a subtle light-mode background texture as an alternative/addition to the
+      hero's circuit-trace field — idea from 2026-08-16: a repeating grid of vertical
+      arch/petal shapes (half-ovals), offset like brick coursing so they interlock, rendered
+      tone-on-tone (same hue as `--bg`, only readable via subtle shadow/highlight, not color
+      contrast) — a mid-century "scallop"/wall-panel motif. Not started; explore as its own
+      pass, not folded into the current branch.
 - [ ] User test the site (get feedback from referred prospects)
 - [ ] Refine CTA copy based on testing
 - [ ] Consider: add FAQ section to `/about` or home page
