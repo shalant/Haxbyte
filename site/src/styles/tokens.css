@@ -1,12 +1,59 @@
+/* Self-hosted fonts (Cloudflare Pages already serves the CDN — see
+   docs/engineering-standards.md's "don't add a second CDN/asset host" rule,
+   which is why these are local files instead of a Google Fonts <link>). */
+@font-face {
+	font-family: 'IBM Plex Mono';
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+	src: url('/fonts/ibm-plex-mono-400.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'IBM Plex Mono';
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+	src: url('/fonts/ibm-plex-mono-700.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Source Serif 4';
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+	src: url('/fonts/source-serif-4-400.woff2') format('woff2');
+}
+
 /* Design Tokens */
 :root {
-	/* Colors */
+	/* Brand constants — fixed values, not theme-aware. Kept for pages/
+	   components still using them directly; new work should prefer the
+	   semantic tokens below, which flip between light/dark. */
 	--ink: #0B1220;
 	--paper: #EEF1EF;
 	--signal: #2DD4BF;
 	--spark: #E8703F;
 	--ash: #5B6A66;
 	--white: #FFFFFF;
+
+	/* Semantic theme tokens — the whole page shares one tone at a time;
+	   toggle sets [data-theme] on <html>, defaults to system preference.
+	   Accents (signal/spark) stay constant across themes on purpose —
+	   only neutrals and the hero trace treatment flip. */
+	--bg: var(--paper);
+	--surface: var(--white);
+	--surface-2: #131C30;
+	--surface-2-soft: #0B1220;
+	--text: var(--ink);
+	--text-muted: var(--ash);
+	--line: #DDE3DF;
+	--trace-color: var(--ink);
+	--trace-opacity: 0.05;
+	--shadow-1: rgba(11, 18, 32, 0.05);
+	--shadow-2: rgba(11, 18, 32, 0.07);
+	--shadow-3: rgba(11, 18, 32, 0.06);
+	--card-border: transparent;
+	--nav-glass: rgba(238, 241, 239, 0.68);
+	--nav-border: rgba(11, 18, 32, 0.08);
 
 	/* Typography Scale */
 	--text-xs: 0.75rem;
@@ -55,6 +102,39 @@
 	--duration-slow: 350ms;
 }
 
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--bg: #0B1220;
+		--surface: #131C30;
+		--text: #EAF0EE;
+		--text-muted: #93A29C;
+		--line: rgba(255, 255, 255, 0.10);
+		--trace-color: #2DD4BF;
+		--trace-opacity: 0.18;
+		--shadow-1: rgba(0, 0, 0, 0.35);
+		--shadow-2: rgba(0, 0, 0, 0.4);
+		--shadow-3: rgba(0, 0, 0, 0.3);
+		--card-border: rgba(45, 212, 191, 0.16);
+		--nav-glass: rgba(11, 18, 32, 0.55);
+		--nav-border: rgba(45, 212, 191, 0.14);
+	}
+}
+:root[data-theme="dark"] {
+	--bg: #0B1220;
+	--surface: #131C30;
+	--text: #EAF0EE;
+	--text-muted: #93A29C;
+	--line: rgba(255, 255, 255, 0.10);
+	--trace-color: #2DD4BF;
+	--trace-opacity: 0.18;
+	--shadow-1: rgba(0, 0, 0, 0.35);
+	--shadow-2: rgba(0, 0, 0, 0.4);
+	--shadow-3: rgba(0, 0, 0, 0.3);
+	--card-border: rgba(45, 212, 191, 0.16);
+	--nav-glass: rgba(11, 18, 32, 0.55);
+	--nav-border: rgba(45, 212, 191, 0.14);
+}
+
 /* Base Styles */
 * {
 	margin: 0;
@@ -72,8 +152,9 @@ body {
 	font-family: 'Source Serif 4', 'Lora', serif;
 	font-size: var(--text-base);
 	line-height: var(--leading-normal);
-	color: var(--ink);
-	background-color: var(--paper);
+	color: var(--text);
+	background-color: var(--bg);
+	transition: background-color var(--duration-normal), color var(--duration-normal);
 }
 
 /* Headings */
@@ -140,7 +221,7 @@ code {
 pre {
 	overflow-x: auto;
 	padding: var(--space-md);
-	background-color: var(--ink);
+	background-color: var(--surface-2);
 	color: var(--white);
 	border-radius: var(--radius-md);
 	margin-bottom: var(--space-md);
