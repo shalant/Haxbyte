@@ -1,10 +1,10 @@
 # Haxbyte Project TODO
 
 **Last updated:** 2026-08-16  
-**Status:** Homepage + nav/footer rebuilt on a real light/dark theme system (merged). Launch
-blocker resolved — working through the remaining pre-deployment checklist now (Cloudflare
-Pages setup, accessibility/security pass, analytics). Domain purchase and Cloudflare project
-connection are dashboard steps Doug needs to do manually.
+**Status:** Homepage + nav/footer rebuilt on a real light/dark theme system (merged). Site is
+**live at https://haxbyte.com** — Cloudflare deployment and custom domain are both done.
+Remaining pre-launch items: Web Analytics toggle, real-device mobile testing, and the
+`about.astro` copy pass, then the launch announcement.
 
 **Recent work (2026-08-15):**
 - ✅ Font direction settled: IBM Plex Mono (display/utility) + Source Serif 4 (body), now
@@ -33,7 +33,14 @@ connection are dashboard steps Doug needs to do manually.
       `site/wrangler.jsonc`, added this session, which points it at `./dist`). Build
       succeeded (30 files uploaded). `site/public/_headers` (CSP etc.) is confirmed still
       supported under Workers static-assets, not just classic Pages.
-- [ ] Configure custom domain (haxbyte.com) — dashboard/DNS step, after the above
+- [x] Configure custom domain (haxbyte.com) — done 2026-08-16. Went straight for a full
+      registrar transfer (Cloudflare Registrar) rather than a plain nameserver swap; Cloudflare
+      required the zone to exist on Cloudflare DNS before accepting the transfer, so the
+      nameserver migration happened as part of that flow. Attached `haxbyte.com` as a Custom
+      Domain on the `haxbyte` Worker (Workers & Pages → haxbyte → Domains and routes). Site is
+      live at https://haxbyte.com. Registrar transfer itself (billing/renewal moving to
+      Cloudflare, free 1-year extension past the Dec 17 expiration) may still be finalizing in
+      the background but doesn't block the site.
 - [ ] Enable Cloudflare Web Analytics — dashboard toggle on the Workers project (Analytics →
       Web Analytics → add site), no code change needed; chosen over Google Analytics/
       Plausible for zero-config + no cookie-consent requirement
