@@ -7,15 +7,23 @@ interface Props {
 		date: Date;
 		tags: string[];
 		description?: string;
+		image?: string;
+		imageAlt?: string;
 	};
+	olderPost?: { id: string; data: { title: string } } | null;
+	newerPost?: { id: string; data: { title: string } } | null;
+	readingTime?: number;
 }
 
-const { frontmatter } = Astro.props;
+const { frontmatter, olderPost, newerPost, readingTime } = Astro.props;
 const formattedDate = frontmatter.date.toLocaleDateString('en-US', {
 	year: 'numeric',
 	month: 'long',
 	day: 'numeric',
 });
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const linkedInShareURL = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalURL)}`;
 
 const jsonLd = {
 	'@context': 'https://schema.org',
@@ -34,7 +42,7 @@ const jsonLd = {
 };
 ---
 
-<Base title={frontmatter.title} description={frontmatter.description} type="article">
+<Base title={frontmatter.title} description={frontmatter.description} image={frontmatter.image} type="article">
 	<Fragment slot="head">
 		<meta property="article:published_time" content={frontmatter.date.toISOString()} />
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -46,6 +54,7 @@ const jsonLd = {
 				<time datetime={frontmatter.date.toISOString()}>
 					{formattedDate}
 				</time>
+				{readingTime && <span>{readingTime} min read</span>}
 				{frontmatter.tags && frontmatter.tags.length > 0 && (
 					<div class="tags">
 						{frontmatter.tags.map(tag => (
@@ -54,12 +63,78 @@ const jsonLd = {
 					</div>
 				)}
 			</div>
+			<div class="share-row">
+				<span class="share-label">Share</span>
+				<a class="share-btn" href={linkedInShareURL} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+					<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+						<rect x="3" y="3" width="18" height="18" rx="4" />
+						<line x1="8" y1="11" x2="8" y2="17" />
+						<circle cx="8" cy="7.5" r="0.6" fill="currentColor" />
+						<path d="M12 17v-4c0-1.5 1-2 2-2s2 .5 2 2v4" />
+					</svg>
+				</a>
+				<button class="share-btn copy-link" type="button" data-url={canonicalURL} aria-label="Copy link to this post" title="Copy link">
+					<svg class="icon-link" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M9 15l6-6" />
+						<path d="M10 6l1-1a4 4 0 0 1 6 6l-1 1" />
+						<path d="M14 18l-1 1a4 4 0 0 1-6-6l1-1" />
+					</svg>
+					<svg class="icon-check" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M5 13l4 4L19 7" />
+					</svg>
+				</button>
+			</div>
 		</header>
+		{frontmatter.image && (
+			<img class="post-hero" src={frontmatter.image} alt={frontmatter.imageAlt ?? ''} />
+		)}
 		<div class="post-content">
 			<slot />
 		</div>
+		{(olderPost || newerPost) && (
+			<nav class="post-pager" aria-label="More posts">
+				{olderPost ? (
+					<a class="pager-link pager-older" href={`/blog/${olderPost.id}`}>
+						<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6" /></svg>
+						<span>
+							<span class="pager-label">Older</span>
+							<span class="pager-title">{olderPost.data.title}</span>
+						</span>
+					</a>
+				) : <span />}
+				{newerPost && (
+					<a class="pager-link pager-newer" href={`/blog/${newerPost.id}`}>
+						<span>
+							<span class="pager-label">Newer</span>
+							<span class="pager-title">{newerPost.data.title}</span>
+						</span>
+						<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+					</a>
+				)}
+			</nav>
+		)}
 	</article>
 </Base>
+
+<script>
+	document.querySelectorAll<HTMLButtonElement>('.copy-link').forEach(button => {
+		button.addEventListener('click', async () => {
+			const url = button.dataset.url;
+			if (!url) return;
+			try {
+				await navigator.clipboard.writeText(url);
+				button.classList.add('copied');
+				button.setAttribute('aria-label', 'Link copied');
+				setTimeout(() => {
+					button.classList.remove('copied');
+					button.setAttribute('aria-label', 'Copy link to this post');
+				}, 1800);
+			} catch {
+				// Clipboard API unavailable (e.g. insecure context) — nothing to fall back to silently.
+			}
+		});
+	});
+</script>
 
 <style>
 	.blog-post {
@@ -105,6 +180,74 @@ const jsonLd = {
 		letter-spacing: 0.05em;
 	}
 
+	.share-row {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+		margin-top: var(--space-md);
+	}
+
+	.share-label {
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--text-muted);
+	}
+
+	.share-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		border: 1px solid var(--line);
+		border-radius: var(--radius-sm);
+		color: var(--text);
+		background: none;
+		text-decoration: none;
+		cursor: pointer;
+		transition: border-color var(--duration-normal), color var(--duration-normal);
+	}
+
+	.share-btn:hover {
+		border-color: var(--link);
+		color: var(--link);
+	}
+
+	.share-btn svg {
+		width: 20px;
+		height: 20px;
+		stroke: currentColor;
+		fill: none;
+		stroke-width: 1.6;
+	}
+
+	.copy-link .icon-check {
+		display: none;
+	}
+
+	.copy-link.copied {
+		border-color: var(--link);
+		color: var(--link);
+	}
+
+	.copy-link.copied .icon-link {
+		display: none;
+	}
+
+	.copy-link.copied .icon-check {
+		display: block;
+	}
+
+	.post-hero {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-lg);
+		margin-bottom: var(--space-2xl);
+	}
+
 	.post-content {
 		font-size: var(--text-lg);
 		line-height: var(--leading-relaxed);
@@ -123,5 +266,74 @@ const jsonLd = {
 		height: auto;
 		border-radius: var(--radius-md);
 		margin: var(--space-2xl) 0;
+	}
+
+	.post-pager {
+		display: flex;
+		gap: var(--space-lg);
+		margin-top: var(--space-3xl);
+		padding-top: var(--space-2xl);
+		border-top: 1px solid var(--line);
+	}
+
+	.pager-link {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+		flex: 1;
+		min-width: 0;
+		padding: var(--space-md);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-md);
+		color: var(--text);
+		text-decoration: none;
+		transition: border-color var(--duration-normal), transform var(--duration-normal);
+	}
+
+	.pager-link:hover {
+		border-color: var(--link);
+		transform: translateY(-1px);
+	}
+
+	.pager-newer {
+		justify-content: flex-end;
+		text-align: right;
+	}
+
+	.pager-link svg {
+		flex-shrink: 0;
+		width: 20px;
+		height: 20px;
+		stroke: var(--link);
+		fill: none;
+		stroke-width: 1.6;
+	}
+
+	.pager-link span {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		gap: var(--space-2xs);
+	}
+
+	.pager-label {
+		font-family: 'IBM Plex Mono', monospace;
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--text-muted);
+	}
+
+	.pager-title {
+		font-size: var(--text-sm);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	@media (max-width: 640px) {
+		.pager-title {
+			white-space: normal;
+		}
 	}
 </style>

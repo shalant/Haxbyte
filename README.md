@@ -42,10 +42,10 @@ pitch. Consulting positioning, client leads, and portfolio-as-proof-of-skill con
   work, but is more infrastructure than a static marketing site needs and undercuts the
   "deployed for $0" content angle) and over GoDaddy hosting (not built for git-based static
   deploys).
-- **Domain:** `haxbyte.com`, registered at Hostinger — staying there (no reason to migrate
-  registrars). DNS points to Cloudflare once the site is ready to go live (nameserver
-  migration to Cloudflare is the cleaner option for full CDN benefit; a CNAME record at
-  Hostinger also works if DNS management should stay put).
+- **Domain:** `haxbyte.com`, registered with Cloudflare (transferred from Hostinger; confirmed
+  in the Cloudflare dashboard's Domains → Registrations, Active, expires Dec 17, 2027,
+  auto-renew on). DNS also lives on Cloudflare, so registration and DNS are consolidated in
+  one place.
 - **Contact:** not yet decided — plain `mailto:`/Calendly link (zero setup, default choice
   given the "no spend until there's a client" rule) vs. an actual on-page form (would need
   Cloudflare Pages Functions or a free-tier service like Formspree).

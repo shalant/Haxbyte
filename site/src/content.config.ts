@@ -8,6 +8,8 @@ const blog = defineCollection({
 		date: z.date(),
 		tags: z.array(z.enum(['build-in-public', 'teaching', 'case-study', 'learning'])),
 		description: z.string().optional(),
+		image: z.string().optional(),
+		imageAlt: z.string().optional(),
 		draft: z.boolean().default(false),
 	}),
 });

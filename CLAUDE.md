@@ -56,6 +56,17 @@ anyway and don't work around this with `--date` or scheduling tricks.
 *(Assumption: "normal working hours" means weekdays only, since a strict 7-day version was
 not stated. Flag it if that's wrong.)*
 
+## All changes go on a branch, PR'd into main
+
+**Never commit directly to `main`.** Every change — content, code, docs — goes on a
+feature/content branch (`feature/...` or a descriptive branch name, following the pattern
+of prior branches like `feature/ui-redesign`) and gets merged via a pull request, matching
+every prior batch of work in this repo's history. Cloudflare deploys straight from `main`
+(see `docs/TODO.md`), so anything committed there goes live — routing through a PR is the
+review checkpoint before that happens. If asked to commit work that's sitting directly on
+`main`, move it to a branch first (or ask before doing so if it's ambiguous which changes
+belong together) rather than committing to `main`.
+
 ## Working conventions
 
 - No dependencies exist yet — when scaffolding, use `npm create astro@latest` conventions
