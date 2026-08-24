@@ -1,10 +1,28 @@
 # Haxbyte Project TODO
 
-**Last updated:** 2026-08-16  
-**Status:** Homepage + nav/footer rebuilt on a real light/dark theme system (merged). Launch
-blocker resolved — working through the remaining pre-deployment checklist now (Cloudflare
-Pages setup, accessibility/security pass, analytics). Domain purchase and Cloudflare project
-connection are dashboard steps Doug needs to do manually.
+**Last updated:** 2026-08-23  
+
+**Recent work (2026-08-23):**
+- ✅ Three new blog posts drafted, reviewed, and gated behind `BLOCKED_SLUGS` during content
+  review, then cleared: "Dashboards Lie Until You Check the Raw Output" (genericized to
+  remove any Google/day-job-identifiable detail), "The Saxophone Navbar I Can't Ship", "The
+  Ideal Mentor"
+- ✅ Blog: older/newer post pager, LinkedIn + copy-link share icons, reading-time estimate,
+  RSS feed (`/rss.xml`), per-post `imageAlt` field (schema + all three posts)
+- ✅ Fixed a real bug: `/work/[slug].astro` was rendering raw markdown source via
+  `set:html={piece.body}` instead of compiling it — every `/work` page was showing literal
+  `##`/`![]` syntax. Fixed to match the blog pages' `render()` pattern.
+- ✅ `hardware-etc.md` rewritten with real specifics and real before/after images (pulled
+  from the dougrosenbergdev.com case study, reframed in build-log voice) — see resolved
+  decision under Portfolio & Case Studies below
+- ✅ Nav-link vertical alignment fixed (was 5-10px off from the logo)
+- ✅ New convention documented: all changes go on a branch + PR, never committed straight to
+  `main` (see root `CLAUDE.md`)
+
+**Status:** Homepage + nav/footer rebuilt on a real light/dark theme system (merged). Site is
+**live at https://haxbyte.com** — Cloudflare deployment and custom domain are both done.
+Remaining pre-launch items: Web Analytics toggle, real-device mobile testing, and the
+`about.astro` copy pass, then the launch announcement.
 
 **Recent work (2026-08-15):**
 - ✅ Font direction settled: IBM Plex Mono (display/utility) + Source Serif 4 (body), now
@@ -33,7 +51,14 @@ connection are dashboard steps Doug needs to do manually.
       `site/wrangler.jsonc`, added this session, which points it at `./dist`). Build
       succeeded (30 files uploaded). `site/public/_headers` (CSP etc.) is confirmed still
       supported under Workers static-assets, not just classic Pages.
-- [ ] Configure custom domain (haxbyte.com) — dashboard/DNS step, after the above
+- [x] Configure custom domain (haxbyte.com) — done 2026-08-16. Went straight for a full
+      registrar transfer (Cloudflare Registrar) rather than a plain nameserver swap; Cloudflare
+      required the zone to exist on Cloudflare DNS before accepting the transfer, so the
+      nameserver migration happened as part of that flow. Attached `haxbyte.com` as a Custom
+      Domain on the `haxbyte` Worker (Workers & Pages → haxbyte → Domains and routes). Site is
+      live at https://haxbyte.com. Registrar transfer itself (billing/renewal moving to
+      Cloudflare, free 1-year extension past the Dec 17 expiration) may still be finalizing in
+      the background but doesn't block the site.
 - [ ] Enable Cloudflare Web Analytics — dashboard toggle on the Workers project (Analytics →
       Web Analytics → add site), no code change needed; chosen over Google Analytics/
       Plausible for zero-config + no cookie-consent requirement
@@ -110,18 +135,16 @@ redesign; swap in real posts as they're written.
 - [ ] Post 4: "Wiring an MCP server into a real support workflow"
 
 ### Portfolio & Case Studies
-**Note (2026-08-15):** per `docs/content-strategy.md`'s actual sitemap, `/work` is "build
-logs: write-ups on what I built, how, and why" — Doug's own projects, not client case
-studies. The 2026-08-11 decision below predates the brand split and now contradicts it:
-Hardware Etc and Sonus Construction are consulting client work, which routes to
-dougrosenbergdev.com per the split, not Haxbyte. `site/src/content/work/hardware-etc.md`
-and `sonus-construction.md` still exist and still get built into `/work` today.
-- [ ] Decide: migrate the Hardware Etc / Sonus Construction case studies to
-      dougrosenbergdev.com and replace `/work` here with real build logs (ERP/workflow
-      write-ups, mobile/MAUI learning, this site's own build) — or explicitly re-affirm
-      keeping them here if there's a reason the split doesn't apply to `/work`
-- [ ] Create build-log template for future `/work` entries (once the above is decided)
-- ~~Decided (2026-08-11): Keep `/work` focused on SMB case studies~~ — superseded, see note above
+**Resolved 2026-08-23:** client work (Hardware Etc, Sonus Construction) stays on Haxbyte's
+`/work`, framed as build logs — process and decisions ("how I built it"), not sales
+case studies. That framing is what differentiates it from the dougrosenbergdev.com treatment
+of the same client work, so the brand split holds without needing to migrate anything.
+`hardware-etc.md` was rewritten in this voice 2026-08-23 (see project history) as the
+reference example for future entries.
+- [ ] Rewrite `sonus-construction.md` in the same build-log voice as `hardware-etc.md`
+      (only the latter has been converted so far)
+- [ ] Create a build-log template for future `/work` entries based on the `hardware-etc.md`
+      pattern (challenge → decisions/tradeoffs → outcome, with real before/after images)
 
 ### LinkedIn & Social
 - [ ] Develop LinkedIn content calendar (2-3 posts/week)
@@ -157,9 +180,12 @@ and `sonus-construction.md` still exist and still get built into `/work` today.
 - [ ] Add contact form backend (Cloudflare Functions or external service)
 - [ ] Implement email notifications for contact form submissions
 - [ ] Set up automated performance monitoring (Lighthouse CI)
-- [ ] Add RSS feed for blog
+- [x] Add RSS feed for blog — shipped 2026-08-23, hand-rolled `site/src/pages/rss.xml.ts`
+      (same no-dependency approach as `sitemap.xml.ts`), linked in `<head>` and the footer
 - [ ] Consider: newsletter signup on blog posts
-- [ ] Add breadcrumb navigation for blog posts
+- [ ] Add breadcrumb navigation for blog posts — partially covered by the older/newer post
+      pager shipped 2026-08-23 (chronological, not hierarchical); revisit if a true
+      Home > Blog > Post breadcrumb is still wanted
 - [x] Implement dark mode — shipped 2026-08-15 (toggle + system-preference default); homepage
       + nav/footer covered, `/about`/`/contact`/`/work`/`/blog` still need converting to the
       theme tokens (see `docs/design-system.md`'s "Known gaps")

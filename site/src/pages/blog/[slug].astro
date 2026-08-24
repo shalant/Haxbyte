@@ -1,22 +1,33 @@
 ---
-import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+import { getPublishedPosts } from '../../lib/posts';
 
 export async function getStaticPaths() {
-	const blogPosts = await getCollection('blog');
-	return blogPosts.map(post => ({
+	const blogPosts = await getPublishedPosts();
+	const sortedPosts = blogPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+	return sortedPosts.map((post, index) => ({
 		params: { slug: post.id },
-		props: { post },
+		props: {
+			post,
+			olderPost: sortedPosts[index + 1] ?? null,
+			newerPost: index > 0 ? sortedPosts[index - 1] : null,
+		},
 	}));
 }
 
 interface Props {
 	post: any;
+	olderPost: any;
+	newerPost: any;
 }
 
-const { post } = Astro.props;
+const { post, olderPost, newerPost } = Astro.props;
+const { Content } = await render(post);
+const wordCount = (post.body ?? '').trim().split(/\s+/).filter(Boolean).length;
+const readingTime = Math.max(1, Math.round(wordCount / 200));
 ---
 
-<BlogPost frontmatter={post.data}>
-	<Fragment set:html={post.body} />
+<BlogPost frontmatter={post.data} olderPost={olderPost} newerPost={newerPost} readingTime={readingTime}>
+	<Content />
 </BlogPost>

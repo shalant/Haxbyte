@@ -35,6 +35,7 @@ const ogImageURL = new URL(image, Astro.site);
 		<title>{pageTitle}</title>
 		<link rel="canonical" href={canonicalURL} />
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="alternate" type="application/rss+xml" title="Haxbyte" href="/rss.xml" />
 		<link rel="preload" href="/fonts/ibm-plex-mono-700.woff2" as="font" type="font/woff2" crossorigin />
 		<link rel="preload" href="/fonts/source-serif-4-400.woff2" as="font" type="font/woff2" crossorigin />
 		<script is:inline>
@@ -98,6 +99,7 @@ const ogImageURL = new URL(image, Astro.site);
 				<div class="footer-links">
 					<a href="/about">About</a>
 					<a href="/contact">Contact</a>
+					<a href="/rss.xml">RSS</a>
 				</div>
 			</div>
 		</footer>
@@ -202,6 +204,7 @@ const ogImageURL = new URL(image, Astro.site);
 		font-size: var(--text-sm);
 		transition: color var(--duration-normal);
 		position: relative;
+		top: 6px;
 		min-height: 44px;
 		padding: var(--space-sm) var(--space-2xs);
 	}

@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
 	const workPieces = await getCollection('work');
@@ -15,6 +15,7 @@ interface Props {
 }
 
 const { piece } = Astro.props;
+const { Content } = await render(piece);
 ---
 
 <Base title={piece.data.title} description={piece.data.description}>
@@ -33,7 +34,7 @@ const { piece } = Astro.props;
 			</div>
 		</header>
 		<div class="piece-content">
-			<Fragment set:html={piece.body} />
+			<Content />
 		</div>
 	</article>
 </Base>

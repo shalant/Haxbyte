@@ -1,9 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import PulseLine from '../components/PulseLine.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '../lib/posts';
 
-const blogPosts = await getCollection('blog', ({ data }) => !data.draft);
+const blogPosts = await getPublishedPosts();
 const recentPosts = blogPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
 
 const tagLabels: Record<string, string> = {

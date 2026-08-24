@@ -33,6 +33,32 @@ decision in the brand plan doc for the full reasoning.
 - **Hardware Etc LLC** — B2B materials supplier (Squarespace). Focus: professionalism, bulk purchasing, B2B workflow.
 - **Sonus Construction Group** — General contractor specializing in multi-family renovations (Squarespace). Focus: positioning, process, team-based approach, international procurement.
 
+## Publishing gate for blog posts
+
+Two independent mechanisms decide whether a blog post is publicly reachable. Both live in
+code, not just frontmatter, so a post's exposure is never a silent side effect of editing a
+Markdown file.
+
+1. **`draft: true`** (frontmatter field, `blog` collection schema in `content.config.ts`) —
+   routine unpublished/WIP status. Hides the post from the homepage, `/blog` index, and
+   sitemap in production; still visible in local dev (`import.meta.env.DEV`) so it can be
+   previewed before flipping to `draft: false`.
+2. **`BLOCKED_SLUGS`** (hardcoded set in `site/src/lib/posts.ts`) — a hard gate for posts
+   under separate review (e.g. content/confidentiality concerns), independent of the `draft`
+   field. A blocked slug never builds a page, in any environment, even if `draft` is
+   (accidentally or otherwise) set to `false`. Clearing it requires editing the code, not the
+   post.
+
+All post-listing pages (`/`, `/blog`, `/blog/[slug]`, `sitemap.xml`) pull from the single
+`getPublishedPosts()` helper in `posts.ts` rather than querying the collection directly, so
+both gates apply everywhere consistently.
+
+**Cleared 2026-08-23:** `dashboards-lie-until-you-check-raw-output` and
+`saxophone-navbar-i-cant-ship` were held in `BLOCKED_SLUGS` pending content review — the
+dashboard post specifically because it originally named Google Analytics and gave a specific
+form count, which risked reading as identifiable to Doug's day job. Genericized (no
+product/vendor names, no specific counts) and unblocked; both now publish normally.
+
 ## Content format priorities
 
 From the brand plan:
