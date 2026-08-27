@@ -1,6 +1,12 @@
 # Haxbyte Project TODO
 
-**Last updated:** 2026-08-23  
+**Last updated:** 2026-08-26  
+
+**Recent work (2026-08-26):**
+- ✅ `about.astro` copy pass — reframed "What I Build" (services/referral-project framing) as
+  "What I Write About" (content categories), matching the content-only positioning from
+  `docs/frontend-principles.md`'s Positioning section. No more consulting-pitch language;
+  reads as technical credibility for a cold/recruiter-side reader instead of a buyer trust-check.
 
 **Recent work (2026-08-23):**
 - ✅ Three new blog posts drafted, reviewed, and gated behind `BLOCKED_SLUGS` during content
@@ -21,8 +27,8 @@
 
 **Status:** Homepage + nav/footer rebuilt on a real light/dark theme system (merged). Site is
 **live at https://haxbyte.com** — Cloudflare deployment and custom domain are both done.
-Remaining pre-launch items: Web Analytics toggle, real-device mobile testing, and the
-`about.astro` copy pass, then the launch announcement.
+Remaining pre-launch items: Web Analytics toggle and real-device mobile testing, then the
+launch announcement.
 
 **Recent work (2026-08-15):**
 - ✅ Font direction settled: IBM Plex Mono (display/utility) + Source Serif 4 (body), now
