@@ -37,6 +37,22 @@ longer blocked. Full history in [`docs/open-decisions.md`](./docs/open-decisions
   all site text.
 - [`docs/open-decisions.md`](./docs/open-decisions.md) — remaining unresolved items.
 
+## DNS/Email note: `gigs.haxbyte.com` belongs to a different project
+
+**Not part of this site.** On 2026-08-30, a `gigs.haxbyte.com` subdomain plus Cloudflare
+Email Routing (MX/TXT records at the `haxbyte.com` root, one routing rule) were added via
+the Cloudflare dashboard — not through this repo's code — to support the `GigSync` repo's
+email intake (`guacamayo@gigs.haxbyte.com` → the `gigsync-backend` Worker, an entirely
+separate project). Chosen specifically because `haxbyte.com` was already ours and on
+Cloudflare, avoiding a new domain purchase for that project's testing — see
+`../GigSync/docs/WORKFLOW_DESIGN.md` and `../GigSync/CLAUDE.md` for the full reasoning.
+
+This is invisible from this repo's code (`wrangler.jsonc` here only configures the static
+site itself), so if this domain's DNS/email setup ever looks unfamiliar or gets touched
+during a redesign/migration, check there before assuming it's unused or safe to remove. The
+haxbyte.com root has no other email setup — the default catch-all rule stays disabled, so
+this doesn't affect the rest of the domain.
+
 ## Source of truth for business strategy
 
 Positioning, content plan, and business action items are **not** owned by this repo — they
