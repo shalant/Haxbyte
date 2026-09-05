@@ -202,22 +202,20 @@ reference example for future entries.
 
 ## 🎨 Design & UX Refinements (Medium Priority)
 
-- [ ] Consider a subtle light-mode background texture as an alternative/addition to the
-      hero's circuit-trace field — idea from 2026-08-16: a repeating grid of vertical
-      arch/petal shapes (half-ovals), offset like brick coursing so they interlock, rendered
-      tone-on-tone (same hue as `--bg`, only readable via subtle shadow/highlight, not color
-      contrast) — a mid-century "scallop"/wall-panel motif. **Prototyped 2026-09-05** on
-      branch `design/scallop-texture-exploration` (PR open, not merged — awaiting a design
-      call, not a bug fix): `site/public/scallop-texture.svg` (a vertical arch/petal tile,
-      columns offset by half the vertical pitch for the brick-coursing interlock) used as a
-      `mask-image` on a new `.scallop-emboss` layer in the hero, with two offset copies
+- [x] Subtle light-mode background texture as an alternative/addition to the hero's
+      circuit-trace field — idea from 2026-08-16: a repeating grid of vertical arch/petal
+      shapes (half-ovals), offset like brick coursing so they interlock, rendered tone-on-tone
+      (same hue as `--bg`, only readable via subtle shadow/highlight, not color contrast) — a
+      mid-century "scallop"/wall-panel motif. **Prototyped 2026-09-05, merged 2026-09-05**
+      (PR #21, Doug's own merge — see `docs/design-system.md`'s Signature element section for
+      the shipped implementation): `site/public/scallop-texture.svg` (a vertical arch/petal
+      tile, columns offset by half the vertical pitch for the brick-coursing interlock) used
+      as a `mask-image` on a new `.scallop-emboss` layer in the hero, with two offset copies
       (white/black, `mix-blend-mode: overlay`) for a true highlight+shadow emboss rather than
-      a flat tint — reads correctly as texture, not color, in both themes. Gated by a new
-      `--scallop-opacity` token: 0.06 in light, 0 in dark (the existing teal circuit-trace
-      already carries the motif there). First pass at 0.4 opacity / 120px tiles read as a
-      loud, distracting grid competing with the headline — dialed down to 0.06 opacity /
-      64px tiles, verified against a local build in both themes. Needs Doug's eye before
-      merging: this is a genuine aesthetic call, not something to decide unilaterally.
+      a flat tint. Gated by a new `--scallop-opacity` token: 0.06 in light, 0 in dark (the
+      existing teal circuit-trace already carries the motif there). First pass at 0.4 opacity
+      / 120px tiles read as a loud, distracting grid competing with the headline — dialed down
+      to 0.06 opacity / 64px tiles before Doug reviewed and merged it.
 - [ ] User test the site (get feedback from referred prospects)
 - [ ] Refine CTA copy based on testing
 - [ ] Consider: add FAQ section to `/about` or home page
