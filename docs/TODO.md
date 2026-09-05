@@ -1,6 +1,12 @@
 # Haxbyte Project TODO
 
-**Last updated:** 2026-08-26  
+**Last updated:** 2026-09-05  
+
+**Recent work (2026-09-05):**
+- ✅ `sonus-construction.md` rewritten in build-log voice to match `hardware-etc.md` —
+  dropped the "Key features" bullet list and sales-case-study framing, kept the same real
+  facts (owner-focused positioning, five-step process, international/bulk procurement); no
+  before/after images exist for Sonus so none were added.
 
 **Recent work (2026-08-26):**
 - ✅ `about.astro` copy pass — reframed "What I Build" (services/referral-project framing) as
@@ -163,7 +169,7 @@ case studies. That framing is what differentiates it from the dougrosenbergdev.c
 of the same client work, so the brand split holds without needing to migrate anything.
 `hardware-etc.md` was rewritten in this voice 2026-08-23 (see project history) as the
 reference example for future entries.
-- [ ] Rewrite `sonus-construction.md` in the same build-log voice as `hardware-etc.md`
+- [x] Rewrite `sonus-construction.md` in the same build-log voice as `hardware-etc.md`
       (only the latter has been converted so far)
 - [ ] Create a build-log template for future `/work` entries based on the `hardware-etc.md`
       pattern (challenge → decisions/tradeoffs → outcome, with real before/after images)
