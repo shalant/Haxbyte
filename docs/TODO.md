@@ -220,9 +220,9 @@ reference example for future entries.
 - [ ] Add breadcrumb navigation for blog posts — partially covered by the older/newer post
       pager shipped 2026-08-23 (chronological, not hierarchical); revisit if a true
       Home > Blog > Post breadcrumb is still wanted
-- [x] Implement dark mode — shipped 2026-08-15 (toggle + system-preference default); homepage
-      + nav/footer covered, `/about`/`/contact`/`/work`/`/blog` still need converting to the
-      theme tokens (see `docs/design-system.md`'s "Known gaps")
+- [x] Implement dark mode — shipped 2026-08-15 (toggle + system-preference default). Verified
+      2026-09-05: `/about`/`/contact`/`/work`/`/blog` already use the semantic theme tokens
+      (no separate conversion PR was needed — see `docs/design-system.md`'s "Known gaps")
 - [ ] Add search functionality to blog
 
 ---
