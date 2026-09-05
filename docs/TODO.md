@@ -79,6 +79,18 @@ launch announcement.
 - [x] Add JSON-LD structured data for blog posts (publish date, author, description)
 - [x] Create custom 404 error page
 
+### GEO (Generative Engine Optimization)
+- [x] Add `llms.txt` — built 2026-09-04 as a hand-rolled Astro endpoint
+      (`site/src/pages/llms.txt.ts`), same pattern as `rss.xml.ts`/`sitemap.xml.ts`: generated
+      at build time from the `blog`/`work` collections rather than hand-maintained, so it can't
+      go stale relative to what's actually published.
+- [x] Add site-wide `Person`/`WebSite` JSON-LD — added to the homepage only (not every page),
+      with `Person.sameAs` linking to LinkedIn so AI engines can disambiguate/attribute Doug as
+      an entity. Per-post `BlogPosting` JSON-LD (added earlier) still handles article-level data.
+- [ ] Content-shape pass — review existing pages (About, Contact, older posts) for whether key
+      facts read as clean, standalone, quotable statements vs. only marketing-toned prose; that
+      distinction is what actually gets lifted into an AI-generated answer. Not started.
+
 ### Mobile Testing (Critical)
 - [ ] Test on real iPhone (Safari)
 - [ ] Test on real Android device (Chrome)

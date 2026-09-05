@@ -13,6 +13,24 @@ const tagLabels: Record<string, string> = {
 	learning: 'Learning',
 };
 
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'Person',
+			name: 'Doug Rosenberg',
+			url: new URL('/about', Astro.site).toString(),
+			sameAs: ['https://linkedin.com/in/doug-rosenberg'],
+		},
+		{
+			'@type': 'WebSite',
+			name: 'Haxbyte',
+			url: Astro.site?.toString(),
+			author: { '@type': 'Person', name: 'Doug Rosenberg' },
+		},
+	],
+};
+
 const steps = [
 	{
 		title: 'Scope it in writing',
@@ -34,6 +52,10 @@ const steps = [
 ---
 
 <Base>
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	</Fragment>
+
 	<!-- Hero -->
 	<header class="hero">
 		<svg class="traces" viewBox="0 0 1120 400" preserveAspectRatio="none" aria-hidden="true">
