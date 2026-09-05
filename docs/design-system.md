@@ -90,6 +90,28 @@ logo's circuit trace. Reused as:
 Ties the logo, the code/circuit subject matter, and a quiet nod to Doug's music background
 (reads as both a circuit trace and a signal waveform) into one motif specific to Haxbyte.
 
+## Prototype: scallop/wall-panel hero texture (not yet merged)
+
+**2026-09-05, branch `design/scallop-texture-exploration`, PR open, awaiting Doug's call.**
+A tone-on-tone light-mode-only texture for the hero: a repeating grid of vertical arch/petal
+shapes, columns offset by half the vertical pitch (brick coursing) so they interlock — a
+mid-century "scallop"/wall-panel motif, distinct from the pulse-line/circuit-trace above.
+
+- `site/public/scallop-texture.svg` — a single arch-tile, used as a `mask-image` (not a
+  color fill) so the shape can be tinted dynamically per element rather than baked into the
+  asset.
+- Two copies of the mask (white / black, `mix-blend-mode: overlay`, offset ±1px) create a
+  real highlight+shadow emboss instead of a flat tint — this is what makes it read as
+  *texture* rather than a pattern in a slightly different color, matching the "tone-on-tone"
+  brief.
+- New `--scallop-opacity` token in `tokens.css`: `0.06` in light, `0` in both dark blocks —
+  the existing teal circuit-trace already fills this role in dark mode, so the texture is an
+  addition to light mode specifically, not a replacement.
+- Tuning matters a lot here: an early pass at 0.4 opacity / 120px tiles read as a loud,
+  distracting grid competing with the headline. 0.06 opacity / 64px tiles is what's on the
+  branch now, verified against a local build in both themes — but this is a genuine
+  aesthetic call for Doug, not something to merge unilaterally.
+
 ## Implementation status (as of 2026-08-15)
 
 **Branding integrated, homepage + nav/footer on the new theme system:**
