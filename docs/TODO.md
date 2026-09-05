@@ -1,6 +1,16 @@
 # Haxbyte Project TODO
 
-**Last updated:** 2026-08-26  
+**Last updated:** 2026-09-05  
+
+**Recent work (2026-09-05):**
+- ✅ Build-log template for future `/work` entries created at
+  `docs/templates/work-entry-template.md` — outside the `work` content collection on
+  purpose: the collection's glob loader (`site/src/content.config.ts`,
+  `pattern: '**/*.md'`) has no underscore-exclusion and the schema has no `draft` field, so
+  a template file placed in `site/src/content/work/` (even `_template.md`) would build and
+  publish live at a real `/work/...` URL. Template mirrors `hardware-etc.md`'s structure
+  (frontmatter → What it needed / What I built / How it turned out) with bracketed
+  guidance per section and a pointer to `docs/frontend-principles.md`'s Copy & voice rules.
 
 **Recent work (2026-08-26):**
 - ✅ `about.astro` copy pass — reframed "What I Build" (services/referral-project framing) as
@@ -165,8 +175,11 @@ of the same client work, so the brand split holds without needing to migrate any
 reference example for future entries.
 - [ ] Rewrite `sonus-construction.md` in the same build-log voice as `hardware-etc.md`
       (only the latter has been converted so far)
-- [ ] Create a build-log template for future `/work` entries based on the `hardware-etc.md`
-      pattern (challenge → decisions/tradeoffs → outcome, with real before/after images)
+- [x] Create a build-log template for future `/work` entries based on the `hardware-etc.md`
+      pattern (challenge → decisions/tradeoffs → outcome, with real before/after images) —
+      done 2026-09-05 at `docs/templates/work-entry-template.md` (kept outside the `work`
+      content collection so it can't accidentally publish as a live page; see "Recent work"
+      above for why)
 
 ### LinkedIn & Social
 - [ ] Develop LinkedIn content calendar (2-3 posts/week)
