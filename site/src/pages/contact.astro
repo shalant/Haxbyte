@@ -33,6 +33,34 @@ import Base from '../layouts/Base.astro';
 				</div>
 			</div>
 
+			<div class="contact-form-section">
+				<h2>Or send a message directly</h2>
+				<form id="contact-form" novalidate>
+					<div class="form-row">
+						<label for="name">Name</label>
+						<input type="text" id="name" name="name" required maxlength="200" autocomplete="name" />
+					</div>
+					<div class="form-row">
+						<label for="email">Email</label>
+						<input type="email" id="email" name="email" required maxlength="200" autocomplete="email" />
+					</div>
+					<div class="form-row">
+						<label for="message">Message</label>
+						<textarea id="message" name="message" required maxlength="5000" rows="5"></textarea>
+					</div>
+					<!-- Honeypot: hidden from real visitors via CSS, not the `hidden`
+					     attribute (some bots skip fields with `hidden`/display:none
+					     detected too crudely; off-screen positioning is a bit more
+					     robust while staying invisible/unreachable for real users). -->
+					<div class="form-row honeypot" aria-hidden="true">
+						<label for="website">Website</label>
+						<input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+					</div>
+					<button type="submit">Send Message</button>
+					<p id="form-status" role="status"></p>
+				</form>
+			</div>
+
 			<div class="contact-note">
 				<p>
 					I read every email and usually reply within a few days.
@@ -41,6 +69,59 @@ import Base from '../layouts/Base.astro';
 		</section>
 	</div>
 </Base>
+
+<script>
+	const form = document.getElementById("contact-form") as HTMLFormElement;
+	const status = document.getElementById("form-status") as HTMLParagraphElement;
+	const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+	form.addEventListener("submit", async (event) => {
+		event.preventDefault();
+		status.textContent = "";
+		status.className = "";
+
+		const formData = new FormData(form);
+		const payload = {
+			name: String(formData.get("name") ?? "").trim(),
+			email: String(formData.get("email") ?? "").trim(),
+			message: String(formData.get("message") ?? "").trim(),
+			website: String(formData.get("website") ?? ""),
+		};
+
+		if (!payload.name || !payload.email || !payload.message) {
+			status.textContent = "Please fill in your name, email, and message.";
+			status.className = "status-error";
+			return;
+		}
+
+		submitButton.disabled = true;
+		submitButton.textContent = "Sending...";
+
+		try {
+			const response = await fetch("/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			});
+			const result = await response.json();
+
+			if (response.ok) {
+				status.textContent = "Message sent — thanks! I'll reply within a few days.";
+				status.className = "status-success";
+				form.reset();
+			} else {
+				status.textContent = result.error || "Something went wrong. Please email directly instead.";
+				status.className = "status-error";
+			}
+		} catch {
+			status.textContent = "Something went wrong. Please email directly instead.";
+			status.className = "status-error";
+		} finally {
+			submitButton.disabled = false;
+			submitButton.textContent = "Send Message";
+		}
+	});
+</script>
 
 <style>
 	.contact-container {
@@ -119,5 +200,108 @@ import Base from '../layouts/Base.astro';
 	.contact-note p {
 		margin: 0;
 		color: var(--text-muted);
+	}
+
+	.contact-form-section {
+		padding: var(--space-lg);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-md);
+		background-color: var(--surface);
+	}
+
+	.contact-form-section h2 {
+		margin-top: 0;
+		font-size: var(--text-xl);
+		text-align: center;
+		margin-bottom: var(--space-lg);
+	}
+
+	.form-row {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+		margin-bottom: var(--space-md);
+	}
+
+	.form-row label {
+		font-weight: 600;
+		font-size: var(--text-sm);
+	}
+
+	.form-row input,
+	.form-row textarea {
+		padding: var(--space-sm);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-sm);
+		background-color: var(--bg);
+		color: var(--text);
+		font: inherit;
+	}
+
+	.form-row input:focus-visible,
+	.form-row textarea:focus-visible {
+		/* --link, not --signal — same accessible-teal-stand-in reasoning as
+		   the status-success color above; this is the first focus ring in
+		   the site so there's no existing pattern to match, but plain
+		   --signal likely fails the 3:1 non-text contrast minimum against
+		   the light theme's --bg too, not just the 4.5:1 text case. */
+		outline: 2px solid var(--link);
+		outline-offset: 1px;
+	}
+
+	.form-row textarea {
+		resize: vertical;
+	}
+
+	.honeypot {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+
+	#contact-form button[type="submit"] {
+		display: block;
+		width: 100%;
+		padding: var(--space-sm) var(--space-lg);
+		border: none;
+		border-radius: var(--radius-sm);
+		background-color: var(--signal);
+		/* --ink (dark), not --paper/white — --signal (#2DD4BF) is bright
+		   enough that light text on it fails WCAG AA (~1.6:1), the same
+		   contrast trap already documented and fixed for teal-as-text
+		   elsewhere in tokens.css. Dark text on the bright accent instead. */
+		color: var(--ink);
+		font-weight: 600;
+		font-size: var(--text-base);
+		cursor: pointer;
+	}
+
+	#contact-form button[type="submit"]:hover:not(:disabled) {
+		opacity: 0.9;
+	}
+
+	#contact-form button[type="submit"]:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	#form-status {
+		margin: var(--space-sm) 0 0;
+		font-size: var(--text-sm);
+		min-height: 1.2em;
+	}
+
+	.status-success {
+		/* --link, not --signal — --signal as TEXT fails WCAG AA on the light
+		   theme (~1.6:1), per tokens.css's documented fix for the same trap. */
+		color: var(--link);
+	}
+
+	.status-error {
+		/* Same reasoning, --spark family: --link-orange is the accessible
+		   text-color stand-in per tokens.css. */
+		color: var(--link-orange);
 	}
 </style>
