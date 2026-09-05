@@ -111,10 +111,12 @@ Ties the logo, the code/circuit subject matter, and a quiet nod to Doug's music 
   for interactive elements and accents
 
 **Known gaps, not yet covered by this pass:**
-- `/about`, `/contact`, `/work`, `/blog` pages still use the fixed `--ink`/`--paper` tokens
-  directly rather than the theme-aware `--text`/`--bg` tokens — they render correctly but
-  won't visually respond to the toggle yet (nav/footer will flip around them). Converting
-  them is the natural next PR.
+- ~~`/about`, `/contact`, `/work`, `/blog` pages still use the fixed `--ink`/`--paper` tokens
+  directly~~ — **resolved, verified 2026-09-05:** these pages (and `BlogPost.astro`, `404.astro`)
+  now use only the semantic `--text`/`--bg`/`--surface`/`--line`/`--link` tokens, which flip
+  correctly with the toggle per `tokens.css`. No code change was needed — this note was stale
+  relative to work already done in a prior pass; likely got missed when this doc was last
+  updated.
 - The global `a { color: var(--signal) }` link-color rule fails WCAG AA contrast on the light
   palette (~1.6:1, needs 4.5:1) — see Color above. Pre-existing, not introduced by this pass,
   not yet fixed since it's a site-wide visual change beyond this PR's scope.

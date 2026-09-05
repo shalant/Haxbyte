@@ -1,30 +1,25 @@
 ---
 title: Sonus Construction Group — General Contractor Site
 client: Sonus Construction Group
-description: A Squarespace site for a Chicago-based general contractor, built around their owner-focused positioning and process
+description: A Squarespace site for a Chicago-based general contractor, built to carry their owner-focused positioning and process instead of a generic contractor template.
 tags: [squarespace, construction, portfolio, b2b]
 featured: true
 ---
 
 ## What it needed
 
-Sonus Construction Group needed a sophisticated online presence that positioned them as a full-service general contractor specializing in multi-family value-add renovations. The site had to communicate their approach — thinking like owners, managing budgets and timelines, sourcing materials internationally — while showcasing past projects and their team-based methodology.
+Sonus is a full-service general contractor that specializes in multi-family value-add renovations — the kind of work where the buyer is a property owner or developer, not a homeowner picking a contractor off a review site. Their positioning already existed and was specific: "We think like owners," a five-step process (Planning, Efficiencies, Collaboration, Long-Term Teams, Continuous Improvement), and real operational detail like sourcing materials internationally and buying in bulk. None of that is generic contractor copy, and the site couldn't flatten it into one.
 
 ## What I built
 
-A professional Squarespace site that leads with their positioning and process. The homepage opens with their core value: "We are a full-service general contractor that specializes in multi-family value-add renovations," followed by "We think like owners" and visual communication of their expertise.
+Squarespace was the right call here for the same reason it was on Hardware Etc's site: a construction company needs to swap in new project photos and update copy on its own, and doesn't need a custom app to do it. The job wasn't picking the platform — it was making sure Sonus's actual positioning survived the build instead of getting smoothed into stock contractor-site language.
 
-**Key features:**
-- Strong brand identity and professional photography
-- Clear positioning around owner-focused approach
-- Process section highlighting their methodology: Planning, Efficiencies, Collaboration, Long-Term Teams, Continuous Improvement
-- Projects portfolio showcasing completed work
-- Team/People section building trust and credibility
-- International procurement and bulk purchasing capabilities highlighted
-- Multiple contact paths for inquiry
+That meant structuring the homepage around the owner-focused framing directly — leading with "We are a full-service general contractor that specializes in multi-family value-add renovations" and "We think like owners" as the opening statement, not buried under a hero photo and a generic tagline. The five-step process became its own section rather than a paragraph, because it's a real methodology Sonus uses to sell the relationship, not filler. Same logic for the international and bulk-procurement sourcing — a detail most GC sites skip because it's operational rather than aspirational, but it's one of the more concrete things Sonus can point to.
+
+The rest of the structure — a projects section, a team section, more than one path to contact — exists because a property owner evaluating a GC for a multi-family renovation is doing real diligence, not making an impulse decision. The site needed to hold up under that kind of read.
 
 ## How it turned out
 
-The site positions Sonus as a sophisticated, professional contractor capable of complex multi-family projects — communicating both strategic thinking and operational execution to property owners and fellow industry professionals alike.
+The site is live and carries Sonus's positioning — owner-focused, process-driven, specific about sourcing — through the structure instead of around it.
 
 **Live site:** [sonusconstruction.com](https://www.sonusconstruction.com)

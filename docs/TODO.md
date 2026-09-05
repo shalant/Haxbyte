@@ -11,6 +11,10 @@
   publish live at a real `/work/...` URL. Template mirrors `hardware-etc.md`'s structure
   (frontmatter → What it needed / What I built / How it turned out) with bracketed
   guidance per section and a pointer to `docs/frontend-principles.md`'s Copy & voice rules.
+- ✅ `sonus-construction.md` rewritten in build-log voice to match `hardware-etc.md` —
+  dropped the "Key features" bullet list and sales-case-study framing, kept the same real
+  facts (owner-focused positioning, five-step process, international/bulk procurement); no
+  before/after images exist for Sonus so none were added.
 
 **Recent work (2026-08-26):**
 - ✅ `about.astro` copy pass — reframed "What I Build" (services/referral-project framing) as
@@ -173,7 +177,7 @@ case studies. That framing is what differentiates it from the dougrosenbergdev.c
 of the same client work, so the brand split holds without needing to migrate anything.
 `hardware-etc.md` was rewritten in this voice 2026-08-23 (see project history) as the
 reference example for future entries.
-- [ ] Rewrite `sonus-construction.md` in the same build-log voice as `hardware-etc.md`
+- [x] Rewrite `sonus-construction.md` in the same build-log voice as `hardware-etc.md`
       (only the latter has been converted so far)
 - [x] Create a build-log template for future `/work` entries based on the `hardware-etc.md`
       pattern (challenge → decisions/tradeoffs → outcome, with real before/after images) —
@@ -233,9 +237,9 @@ reference example for future entries.
 - [ ] Add breadcrumb navigation for blog posts — partially covered by the older/newer post
       pager shipped 2026-08-23 (chronological, not hierarchical); revisit if a true
       Home > Blog > Post breadcrumb is still wanted
-- [x] Implement dark mode — shipped 2026-08-15 (toggle + system-preference default); homepage
-      + nav/footer covered, `/about`/`/contact`/`/work`/`/blog` still need converting to the
-      theme tokens (see `docs/design-system.md`'s "Known gaps")
+- [x] Implement dark mode — shipped 2026-08-15 (toggle + system-preference default). Verified
+      2026-09-05: `/about`/`/contact`/`/work`/`/blog` already use the semantic theme tokens
+      (no separate conversion PR was needed — see `docs/design-system.md`'s "Known gaps")
 - [ ] Add search functionality to blog
 
 ---
