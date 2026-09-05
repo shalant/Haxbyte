@@ -234,7 +234,15 @@ reference example for future entries.
       "Destination Address" in this Cloudflare account's Email Routing settings (dashboard ->
       the zone -> Email -> Email Routing -> Destination Addresses) — a one-time email
       confirmation click.
-- [ ] Set up automated performance monitoring (Lighthouse CI)
+- [x] Set up automated performance monitoring (Lighthouse CI) — added 2026-09-05 as
+      `.github/workflows/lighthouse.yml` (PR-time check only, runs on PRs into `main` and
+      pushes to `main`; deploy-path-neutral, doesn't touch Cloudflare's own dashboard
+      git-integration deploy). Builds `site/` and runs `@lhci/cli` (new devDependency)
+      against the static `dist/` output via lhci's built-in server per
+      `site/lighthouserc.json`: Performance/Best-Practices/SEO floor 0.9, Accessibility
+      floor 0.95. Verified with a real local `npx lhci autorun` run (headless Chrome was
+      available in this environment) against 5 pages (home/about/contact/blog/work), not
+      just structural validation of the YAML/config.
 - [x] Add RSS feed for blog — shipped 2026-08-23, hand-rolled `site/src/pages/rss.xml.ts`
       (same no-dependency approach as `sitemap.xml.ts`), linked in `<head>` and the footer
 - [ ] Consider: newsletter signup on blog posts

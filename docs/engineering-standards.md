@@ -28,6 +28,12 @@ Design and build for the smallest viewport first, then progressively enhance up 
   payload cost.
 - Cloudflare Pages' CDN (already the hosting choice — see `docs/architecture.md`) covers
   fast delivery; don't add a second CDN/asset host on top of it.
+- Automated regression check: `.github/workflows/lighthouse.yml` runs Lighthouse CI
+  (`@lhci/cli`) against the production build on every PR into `main` (and on push to
+  `main`), asserting Performance/Best-Practices/SEO ≥ 0.9 and Accessibility ≥ 0.95 (see
+  `site/lighthouserc.json`). This is a PR-time check only — it runs in GitHub Actions and
+  is separate from the actual Cloudflare deploy, which still goes straight from `main`
+  through Cloudflare's own dashboard git integration.
 
 ## Design & experience
 
