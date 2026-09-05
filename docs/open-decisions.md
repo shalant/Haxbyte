@@ -1,7 +1,15 @@
 # Open decisions
 
-- [ ] **Contact method** — plain `mailto:`/Calendly link vs. an on-page form (would need
-      Cloudflare Pages Functions or a free-tier service like Formspree).
+- [x] **Contact method** — resolved 2026-09-02: built an on-page form alongside the existing
+      `mailto:`/LinkedIn links, not a replacement for them. Backend is a standalone Cloudflare
+      Worker (`site/src/worker.js`, wired via `main` in `wrangler.jsonc`) rather than Pages
+      Functions specifically — Cloudflare's dashboard already moved haxbyte.com to the unified
+      "Workers & Pages" flow (see docs/TODO.md's Cloudflare setup notes), so a plain Worker
+      `fetch` handler in front of the `ASSETS` binding was the natural fit, not a separate
+      Functions directory. Sends via Cloudflare's native Workers `send_email` binding, not a
+      third-party API — no external account or secret needed. Still needs, before it actually
+      sends anything: verify `doug.rosenberg@gmail.com` as a "Destination Address" in this
+      Cloudflare account's Email Routing settings (one-time email confirmation click).
 - [x] ~~**Domain consolidation** across the four owned domains~~ — **mostly resolved
       2026-08-15**: `haxbyte.com` = content brand (cold/discoverable audience),
       `dougrosenbergdev.com` = consulting + client-facing portfolio (warm-referral leads,

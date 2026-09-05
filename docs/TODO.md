@@ -183,8 +183,20 @@ reference example for future entries.
 
 ## 🛠️ Technical Debt & Improvements (Lower Priority)
 
-- [ ] Add contact form backend (Cloudflare Functions or external service)
-- [ ] Implement email notifications for contact form submissions
+- [x] Add contact form backend — built 2026-09-02 on `feature/contact-form-worker`, not yet
+      merged/deployed. Standalone Cloudflare Worker (`site/src/worker.js`) handling
+      `POST /api/contact`, wired via `main` in `wrangler.jsonc` alongside the existing `assets`
+      config, falling back to `env.ASSETS.fetch()` for everything else. Server-side validation +
+      a honeypot field + an Origin check (not full CSRF — there's no session to protect, just a
+      cheap reject of the obvious cross-site case). See `docs/open-decisions.md`'s resolved
+      "Contact method" entry for the full reasoning.
+- [ ] Implement email notifications for contact form submissions — code is in place, sending via
+      Cloudflare's native Workers `send_email` binding (see `send_email` in `wrangler.jsonc` and
+      `site/src/worker.js`), not a third-party API — no external account or secret needed. Still
+      needs, before it actually sends anything: verify `doug.rosenberg@gmail.com` as a
+      "Destination Address" in this Cloudflare account's Email Routing settings (dashboard ->
+      the zone -> Email -> Email Routing -> Destination Addresses) — a one-time email
+      confirmation click.
 - [ ] Set up automated performance monitoring (Lighthouse CI)
 - [x] Add RSS feed for blog — shipped 2026-08-23, hand-rolled `site/src/pages/rss.xml.ts`
       (same no-dependency approach as `sitemap.xml.ts`), linked in `<head>` and the footer

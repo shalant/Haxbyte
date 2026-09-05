@@ -5,7 +5,19 @@
 	// to "site" so this file (and the ./dist it points to) resolves
 	// correctly; see docs/TODO.md's Cloudflare setup notes.
 	"name": "haxbyte",
+	"main": "./src/worker.js",
 	"compatibility_date": "2026-08-16",
+	// Lets the Worker send contact-form email via Cloudflare's native Workers
+	// send_email binding — no third-party account/API key needed. The
+	// destination_address must be a verified "Destination Address" in this
+	// Cloudflare account's Email Routing settings (one-time email
+	// confirmation) before sends will succeed. See src/worker.js.
+	"send_email": [
+		{
+			"name": "CONTACT_EMAIL",
+			"destination_address": "doug.rosenberg@gmail.com"
+		}
+	],
 	"assets": {
 		"directory": "./dist",
 		// Without this, unmatched routes get a bare 404 with an empty body
