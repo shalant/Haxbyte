@@ -63,6 +63,7 @@ const steps = [
 			<path class="t2" d="M1140,120 L920,120 L900,100 L900,50 L840,50 L820,30 L780,30" />
 			<path class="t3" d="M-20,340 L120,340 L140,320 L220,320 L240,300 L400,300" />
 		</svg>
+		<div class="scallop-emboss" aria-hidden="true"></div>
 		<div class="hero-inner">
 			<p class="eyebrow">Build in public &mdash; Haxbyte</p>
 			<h1 class="headline">
@@ -137,6 +138,42 @@ const steps = [
 	.traces .t2 { stroke-dasharray: 5 260; animation: trace 6.5s linear infinite; animation-delay: -2s; }
 	.traces .t3 { stroke-dasharray: 5 200; animation: trace 4.5s linear infinite; animation-delay: -3.5s; }
 	@keyframes trace { to { stroke-dashoffset: -460; } }
+
+	/* Mid-century scallop/wall-panel motif — vertical arch/petal shapes,
+	   columns offset like brick coursing so they interlock (see
+	   docs/design-system.md). Tone-on-tone: two offset copies of the same
+	   mask, blended as a highlight and a shadow, so the shapes read as a
+	   subtle emboss against --bg rather than a flat color. Light-mode-only
+	   via --scallop-opacity (zeroed in dark, where the teal circuit-trace
+	   above already carries the texture). */
+	.scallop-emboss {
+		position: absolute;
+		inset: 0;
+		opacity: var(--scallop-opacity, 0);
+		pointer-events: none;
+	}
+	.scallop-emboss::before,
+	.scallop-emboss::after {
+		content: '';
+		position: absolute;
+		inset: -2px;
+		-webkit-mask-image: url('/scallop-texture.svg');
+		mask-image: url('/scallop-texture.svg');
+		-webkit-mask-repeat: repeat;
+		mask-repeat: repeat;
+		-webkit-mask-size: 64px 47px;
+		mask-size: 64px 47px;
+	}
+	.scallop-emboss::before {
+		background: #fff;
+		mix-blend-mode: overlay;
+		transform: translate(-1px, -1px);
+	}
+	.scallop-emboss::after {
+		background: #000;
+		mix-blend-mode: overlay;
+		transform: translate(1px, 1px);
+	}
 
 	.hero-inner {
 		position: relative;
