@@ -155,14 +155,16 @@ all done. Remaining pre-launch item: real-device mobile testing, then the launch
 
 ---
 
-## 📝 Content & Marketing (High Priority)
-
-- [ ] Refine copy sitewide — much of it (especially `about.astro`, including "What I Build")
-      is still the pre-2026-08-14/15-split SMB-consulting pitch, not the current
-      content-only/recruiter-engineer positioning. Starting point: reframe "What I Build"
-      around real technical range (enterprise ERP/workflow architecture, LLM/AI integration,
-      mobile/MAUI, this site itself) instead of service categories like "small business
-      sites" / "redesigns" — that framing belongs on dougrosenbergdev.com, not here.
+- [x] ~~Refine copy sitewide~~ — **stale, verified done 2026-09-05.** This item still pointed
+      at `about.astro`'s old "What I Build" SMB-consulting pitch, but that page was already
+      rewritten 2026-08-26 (see "Recent work" above) to "What I Write About" —
+      content-category framing, no consulting-pitch language. Re-checked `about.astro`,
+      `index.astro`, and `contact.astro` for any remaining consult/client/SMB-pitch language
+      (grep for "consult|client|small business|SMB|hire me|services|pricing"): the only hits
+      were the factual "two Squarespace sites for small businesses" biographical detail (past
+      work, not a pitch) and `client` as `/work` case-study metadata (who the client was, not
+      sales copy) — both fine under the current positioning. This checklist item was just
+      never checked off after the 2026-08-26 work; no further copy change was needed.
 
 ### Blog Posts (build-in-public angle)
 **Note (2026-08-15):** the list below predates the content-only brand split — titles aimed
@@ -214,7 +216,14 @@ reference example for future entries.
       at all
 - [ ] Redraw logo SVGs from DALL-E reference (currently PNG only)
 - [ ] Add video intro to hero (optional, performance-conscious approach)
-- [ ] Create a proper 1200×630 `og:image` asset — currently reuses `haxbyte-logo.png` (409×322), which will look small/low-res in social share previews
+- [x] Create a proper 1200×630 `og:image` asset — done 2026-09-05 at
+      `site/public/og-image.png`, wired as `Base.astro`'s default `image` prop (per-post/work
+      images still override it via frontmatter). Built as an HTML page using the real brand
+      tokens/fonts/mark (dark `--ink` bg, mark + wordmark, pulse-line divider, ambient
+      circuit-trace field, tagline, `haxbyte.com`) rather than upscaling the existing
+      409×322 logo PNG, since that would've just been a blurrier version of the same
+      low-res problem. Rendered via a local Chrome tab (not requested from the live site)
+      and captured with the browser screenshot tool, then resized to an exact 1200×630 PNG.
 
 ---
 

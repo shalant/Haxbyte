@@ -120,10 +120,12 @@ Ties the logo, the code/circuit subject matter, and a quiet nod to Doug's music 
 - The global `a { color: var(--signal) }` link-color rule fails WCAG AA contrast on the light
   palette (~1.6:1, needs 4.5:1) — see Color above. Pre-existing, not introduced by this pass,
   not yet fixed since it's a site-wide visual change beyond this PR's scope.
-- `/about` and `/work` (Hardware Etc, Sonus Construction case studies) still carry
-  pre-brand-split copy pitched at SMB consulting clients — stale against the 2026-08-14/15
-  content-only positioning in `docs/frontend-principles.md`. Not touched by this pass since
-  it's a content/copy decision, not a visual one.
+- ~~`/about` and `/work` (Hardware Etc, Sonus Construction case studies) still carry
+  pre-brand-split copy pitched at SMB consulting clients~~ — **resolved.** `about.astro` was
+  rewritten to the content-only "What I Write About" framing 2026-08-26; `hardware-etc.md`
+  was rewritten in build-log voice 2026-08-23 and `sonus-construction.md` 2026-09-05 (see
+  `docs/TODO.md`'s Portfolio & Case Studies section). Re-verified 2026-09-05: no remaining
+  consulting-pitch language sitewide.
 - Nav wraps to two centered rows below `40rem` rather than a true mobile-first collapse —
   functional and non-overlapping, but the nav (and likely other components) hasn't had a
   full mobile-first pass yet.
