@@ -5,7 +5,7 @@ tags: [teaching, case-study]
 description: Everyone's writing GEO advice like it's SEO with new vocabulary. None of it addresses the actual question for a client-rendered app — what a plain HTTP GET returns before any JavaScript runs.
 image: /blog/geo-vs-spa-header.svg
 imageAlt: Two browser-window illustrations side by side. The left, labeled BROWSER, shows a fully rendered page with a headline, paragraphs, cards, and a checkmark. The right, labeled AI CRAWLER, shows the same URL returning an almost-empty page with a dashed circle marked "empty."
-draft: true
+draft: false
 ---
 
 Everyone's suddenly writing about GEO — Generative Engine Optimization, getting your content surfaced by AI answer engines instead of just ranked by Google. Most of it reads like SEO advice with new vocabulary: structured data, an `llms.txt` file, clearer copy.
