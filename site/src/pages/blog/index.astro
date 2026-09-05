@@ -13,40 +13,113 @@ const sortedPosts = blogPosts.sort((a, b) => b.data.date.getTime() - a.data.date
 			<p>Build logs, technical notes, and thoughts on building in public.</p>
 		</header>
 
-		<div class="posts-list">
-			{sortedPosts.map(post => (
-				<article class="post-item">
-					<h2>
-						<a href={`/blog/${post.id}`}>{post.data.title}</a>
-					</h2>
-					<div class="post-meta">
-						<time datetime={post.data.date.toISOString()}>
-							{post.data.date.toLocaleDateString('en-US', {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric',
-							})}
-						</time>
-						{post.data.tags && post.data.tags.length > 0 && (
-							<div class="tags">
-								{post.data.tags.map(tag => (
-									<span class="tag">{tag}</span>
-								))}
-							</div>
-						)}
-					</div>
-					{post.data.description && <p class="description">{post.data.description}</p>}
-				</article>
-			))}
+		{sortedPosts.length > 0 && (
+			<div class="search-box">
+				<label for="blog-search" class="sr-only">Search posts</label>
+				<input type="search" id="blog-search" placeholder="Search posts by title, tag, or topic&hellip;" autocomplete="off" />
+			</div>
+		)}
+
+		<div class="posts-list" id="posts-list">
+			{sortedPosts.map(post => {
+				const searchIndex = [post.data.title, post.data.description, ...(post.data.tags ?? [])]
+					.filter(Boolean)
+					.join(' ')
+					.toLowerCase();
+				return (
+					<article class="post-item" data-search={searchIndex}>
+						<h2>
+							<a href={`/blog/${post.id}`}>{post.data.title}</a>
+						</h2>
+						<div class="post-meta">
+							<time datetime={post.data.date.toISOString()}>
+								{post.data.date.toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: 'long',
+									day: 'numeric',
+								})}
+							</time>
+							{post.data.tags && post.data.tags.length > 0 && (
+								<div class="tags">
+									{post.data.tags.map(tag => (
+										<span class="tag">{tag}</span>
+									))}
+								</div>
+							)}
+						</div>
+						{post.data.description && <p class="description">{post.data.description}</p>}
+					</article>
+				);
+			})}
 		</div>
+
+		<p class="no-results" id="no-results" hidden>No posts match your search.</p>
 
 		{sortedPosts.length === 0 && (
 			<p class="no-posts">No blog posts yet. Check back soon!</p>
 		)}
 	</div>
+
+	<script>
+		const input = document.getElementById('blog-search') as HTMLInputElement | null;
+		const posts = Array.from(document.querySelectorAll<HTMLElement>('.post-item'));
+		const noResults = document.getElementById('no-results');
+
+		input?.addEventListener('input', () => {
+			const query = input.value.trim().toLowerCase();
+			let visibleCount = 0;
+
+			for (const post of posts) {
+				const matches = query === '' || (post.dataset.search ?? '').includes(query);
+				post.hidden = !matches;
+				if (matches) visibleCount++;
+			}
+
+			if (noResults) noResults.hidden = visibleCount > 0;
+		});
+	</script>
 </Base>
 
 <style>
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.search-box {
+		margin-bottom: var(--space-2xl);
+	}
+
+	.search-box input {
+		width: 100%;
+		min-height: 44px;
+		padding: var(--space-sm) var(--space-md);
+		font-family: 'Source Serif 4', 'Lora', serif;
+		font-size: var(--text-base);
+		color: var(--text);
+		background-color: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-md);
+		transition: border-color var(--duration-fast);
+	}
+
+	.search-box input:focus-visible {
+		outline: none;
+		border-color: var(--link);
+	}
+
+	.no-results {
+		text-align: center;
+		color: var(--text-muted);
+		padding: var(--space-2xl) 0;
+	}
 	.blog-container {
 		max-width: var(--max-width-prose);
 		margin: 0 auto;
