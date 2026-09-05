@@ -261,7 +261,14 @@ reference example for future entries.
 - [x] Implement dark mode — shipped 2026-08-15 (toggle + system-preference default). Verified
       2026-09-05: `/about`/`/contact`/`/work`/`/blog` already use the semantic theme tokens
       (no separate conversion PR was needed — see `docs/design-system.md`'s "Known gaps")
-- [ ] Add search functionality to blog
+- [x] Add search functionality to blog — done 2026-09-05 on branch `feature/blog-search` (PR
+      open). Client-side only, no dependency/backend: each post's title/description/tags are
+      pre-lowercased into a `data-search` attribute at build time, and a plain `input` field
+      filters the already-rendered `.post-item` elements on keystroke (same
+      no-build-step-needed approach as the rest of the site). Only a few dozen posts exist,
+      so there's no case for a search index/service. Verified locally: filters by title,
+      description, and tag; shows a "No posts match your search" state; matches the
+      site's existing input/focus styling in both themes.
 
 ---
 
