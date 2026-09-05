@@ -26,9 +26,8 @@
   `main` (see root `CLAUDE.md`)
 
 **Status:** Homepage + nav/footer rebuilt on a real light/dark theme system (merged). Site is
-**live at https://haxbyte.com** — Cloudflare deployment and custom domain are both done.
-Remaining pre-launch items: Web Analytics toggle and real-device mobile testing, then the
-launch announcement.
+**live at https://haxbyte.com** — Cloudflare deployment, custom domain, and Web Analytics are
+all done. Remaining pre-launch item: real-device mobile testing, then the launch announcement.
 
 **Recent work (2026-08-15):**
 - ✅ Font direction settled: IBM Plex Mono (display/utility) + Source Serif 4 (body), now
@@ -65,9 +64,14 @@ launch announcement.
       live at https://haxbyte.com. Registrar transfer itself (billing/renewal moving to
       Cloudflare, free 1-year extension past the Dec 17 expiration) may still be finalizing in
       the background but doesn't block the site.
-- [ ] Enable Cloudflare Web Analytics — dashboard toggle on the Workers project (Analytics →
-      Web Analytics → add site), no code change needed; chosen over Google Analytics/
-      Plausible for zero-config + no cookie-consent requirement
+- [x] Enable Cloudflare Web Analytics — confirmed live 2026-09-04 (dashboard toggle, no code
+      change, chosen over Google Analytics/Plausible for zero-config + no cookie-consent
+      requirement). Discovered already collecting real data going back to launch — 70 visits /
+      100 page views Aug 16–Sep 4, versus the zone Overview's raw "Unique Visitors" stat
+      showing 1,310 over the same window. That gap is expected and not a problem: the Overview
+      number counts every raw edge request (bots, AI/search crawlers, uptime monitors, scanners
+      hitting every public domain), while Web Analytics only counts a visit when a real
+      browser's JS actually executes — same methodology split as GA4 vs. server logs.
 
 ### SEO Fundamentals
 - [x] Create `robots.txt` (allow all, point to sitemap)
