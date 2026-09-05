@@ -91,9 +91,13 @@ all done. Remaining pre-launch item: real-device mobile testing, then the launch
 - [x] Add site-wide `Person`/`WebSite` JSON-LD — added to the homepage only (not every page),
       with `Person.sameAs` linking to LinkedIn so AI engines can disambiguate/attribute Doug as
       an entity. Per-post `BlogPosting` JSON-LD (added earlier) still handles article-level data.
-- [ ] Content-shape pass — review existing pages (About, Contact, older posts) for whether key
-      facts read as clean, standalone, quotable statements vs. only marketing-toned prose; that
-      distinction is what actually gets lifted into an AI-generated answer. Not started.
+- [x] Content-shape pass — reviewed 2026-09-05. About and Contact were already in good shape
+      from the 2026-08-26 rewrite and the 2026-09-04 description tightening (bullet-based facts,
+      clean declarative sentences); left unchanged. Split two biographical facts in
+      `the-ideal-mentor.md` out of subordinate clauses into standalone sentences ("I've been a
+      software developer for 4 years." / "I'm 47.") so they read as clean, quotable facts. Other
+      older posts are narrative case studies/anecdotes without buried background facts needing
+      extraction, so left as-is.
 
 ### Mobile Testing (Critical)
 - [ ] Test on real iPhone (Safari)

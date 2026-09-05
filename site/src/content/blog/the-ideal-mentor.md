@@ -7,7 +7,7 @@ image: /blog/the-ideal-mentor-header.jpg
 imageAlt: An older developer pointing at a laptop screen, explaining something to a younger developer sitting beside him and watching closely.
 ---
 
-In my 4 years as a software developer, I've dealt with imposter syndrome. I assume the ideal developer was hacking games at age 5, acing advanced math, and graduating with a CS degree. I'm 47, and I spent most of my life as a saxophone player.
+I've been a software developer for 4 years. In that time, I've dealt with imposter syndrome — I assume the ideal developer was hacking games at age 5, acing advanced math, and graduating with a CS degree. I'm 47. I spent most of my life as a saxophone player.
 
 Mentorship has been huge for my career. I owe an enormous debt to the smart developers I've been fortunate to work with. But at every point in my journey, I had 20 dumb questions I declined to ask, so I wouldn't burn their valuable time.
 
