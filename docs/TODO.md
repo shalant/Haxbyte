@@ -222,7 +222,11 @@ reference example for future entries.
 - ~~Consider: add testimonials section~~ / ~~"Services" page breakdown~~ — consulting-sales
       framing, contradicts content-only positioning; belongs on dougrosenbergdev.com if done
       at all
-- [ ] Redraw logo SVGs from DALL-E reference (currently PNG only)
+- [ ] Redraw logo SVGs from DALL-E reference (currently PNG only). **Partly done 2026-10-30:**
+      the mark alone (brackets plus circuit trace) is redrawn by hand as
+      `docs/assets/brand/haxbyte-mark.svg`, measured from `haxbyte-logo-source.png`, and used
+      for the favicon. Still open: the full wordmark lockup as SVG. (Before this, the favicon
+      was Astro's default starter mark, not Haxbyte's.)
 - [ ] Add video intro to hero (optional, performance-conscious approach)
 - [x] Create a proper 1200×630 `og:image` asset — done 2026-09-05 at
       `site/public/og-image.png`, wired as `Base.astro`'s default `image` prop (per-post/work
@@ -310,4 +314,4 @@ reference example for future entries.
 - **Launch blocker:** resolved 2026-08-16 — see `docs/open-decisions.md`
 - **Git constraint:** No commits 8:30am–5pm CT, Mon–Fri (Doug's day job)
 - **Docs rule:** Keep docs/ in sync with code changes (implemented 2026-08-11)
-- **Brand assets:** Logo SVGs need redraw from DALL-E reference (not critical for launch)
+- **Brand assets:** the mark is redrawn as SVG (2026-10-30, `docs/assets/brand/haxbyte-mark.svg`) and is now the favicon; the full wordmark lockup still needs a redraw from the DALL-E reference (not critical for launch)

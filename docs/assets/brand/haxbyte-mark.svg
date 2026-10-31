@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="14 -16 186 186" fill="none" stroke-linecap="round" stroke-linejoin="round">
+	<title>Haxbyte</title>
+	<g stroke="#2DD4BF">
+		<path d="M58 44.5 20.5 75 58 108" stroke-width="9" />
+		<circle cx="110" cy="22" r="9" stroke-width="6" />
+		<path d="M110 31V54H87V76H107V95H124V113H106V123" stroke-width="5.5" />
+		<circle cx="106" cy="131.75" r="8.5" stroke-width="5.5" />
+	</g>
+	<path d="M153.8 44.5 191.3 75 153.8 108" stroke="#FFFFFF" stroke-width="9" />
+</svg>
