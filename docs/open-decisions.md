@@ -13,9 +13,10 @@
 - [x] ~~**Domain consolidation** across the four owned domains~~ — **mostly resolved
       2026-08-15**: `haxbyte.com` = content brand (cold/discoverable audience),
       `dougrosenbergdev.com` = consulting + client-facing portfolio (warm-referral leads,
-      real name). `drpcconsulting.com` and `dougrosenbergarchive.com` still genuinely open —
-      revisit only if a concrete need surfaces. See the brand plan doc's domain-split
-      decision.
+      real name). `drpcconsulting.com` and `dougrosenbergarchive.com` **resolved
+      2026-11-04: let both lapse** (no concrete use after three months; consulting lives at
+      `dougrosenbergdev.com/consulting`). See the brand plan doc's domain-split decision and
+      the Hostinger wind-down section in `career-development/docs/SITE_OPS_REGISTRY.md`.
 - [ ] **Logo tagline conflict** — the Haxbyte logo lockup (in `career-development`'s
       `haxbyte-assets/`, not live text on this site) reads "WEB DEVELOPMENT CONSULTANCY,"
       which now conflicts with the content-only positioning above. Flagged in the brand plan
